@@ -286,6 +286,17 @@ class ContextGraphModel(Model):
             raw_metadata['cg_node_type_counter']["type:" + type_token] += 1
 
         raw_metadata['cg_edge_types'].update(raw_sample['ContextGraph']['Edges'].keys())
+
+        '''Note from @mmjb:
+        We nowadays support values on edges in GNNs as well (i.e., they
+        not only have an edge type, such as 'NextLexicalUse', but also a value,
+        such as the distance covered by the edge in lines). It's a purely optional
+        feature (and most edges don't have values anyway), so you can just comment
+        this out (or just set somewhere above the line that's crashing).
+
+        That's what the line below means
+        '''
+        raw_sample['ContextGraph']['EdgeValues'] = {}
         for edge_type, values in raw_sample['ContextGraph']['EdgeValues'].items():
             if len(values) == 0:
                 continue
