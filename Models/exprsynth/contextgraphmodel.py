@@ -12,6 +12,7 @@ from dpu_utils.codeutils.lattice.lattice import LatticeVocabulary
 from dpu_utils.tfmodels.sparsegnn import SparseGGNN
 
 from .model import Model, NO_TYPE, write_to_minibatch
+import pdb
 
 BIG_NUMBER = 1e7
 
@@ -276,7 +277,7 @@ class ContextGraphModel(Model):
     @abstractmethod
     def _load_metadata_from_sample(hyperparameters: Dict[str, Any], raw_sample: Dict[str, Any], raw_metadata: Dict[str, Any]) -> None:
         super(ContextGraphModel, ContextGraphModel)._load_metadata_from_sample(hyperparameters, raw_sample, raw_metadata)
-
+        pdb.set_trace()
         for label_token in raw_sample['ContextGraph']['NodeLabels'].values():
             raw_metadata['cg_node_label_counter'][label_token] += 1
 
