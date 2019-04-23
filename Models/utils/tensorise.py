@@ -34,8 +34,10 @@ def run(arguments):
     type_lattice_file = RichPath.create(arguments['TYPE_LATTICE_FILE'], azure_info_path)
     output_folder = RichPath.create(arguments['OUTPUT_BASE_FOLDER'], azure_info_path)
     input_folders, input_folder_basenames = [], set()
+    print(arguments['INPUT_FOLDER'])
+    print(arguments['TYPE_LATTICE_FILE'])
+    print(arguments['OUTPUT_BASE_FOLDER'])
     for input_folder_name in arguments['INPUT_FOLDER']:
-        print(input_folder_name)
         input_folder_basename = os.path.basename(input_folder_name)
         if input_folder_basename in input_folder_basenames:
             raise ValueError("Several input folders with same basename '%s'!" % (input_folder_basename,))
