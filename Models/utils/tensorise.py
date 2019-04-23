@@ -49,6 +49,8 @@ def run(arguments):
     model_class = get_model_class_from_name(arguments.get('--model', 'nag'))
     hyperparameters = model_class.get_default_hyperparameters()
     hypers_override = arguments.get('--hypers-override')
+    print(hypers_override)
+    print(json.loads(hypers_override))
     if hypers_override is not None:
         hyperparameters.update(json.loads(hypers_override))
 
