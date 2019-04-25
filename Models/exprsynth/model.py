@@ -69,7 +69,8 @@ def make_data_file_parser(model_class: Type["Model"],
         for file_path in file_paths:
             for raw_sample in file_path.read_by_file_suffix():
                 sample = dict()
-                sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']
+                # Replaced HoleLineSpan with SlotTokenIdx again
+                sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['SlotTokenIdx']
 
                 # prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
                 # sample_token_seq = []
@@ -77,7 +78,7 @@ def make_data_file_parser(model_class: Type["Model"],
 
                 sample_token_seq = extract_tokens_from_sample(raw_sample)
                 sample['NumTokensInExpression'] = len(sample_token_seq)
-                # Commenting these out because they're unrelated to out dataset
+                # Commenting these out because they're unrelated to our dataset
                 # if len(raw_sample['VariableUsageContexts']) == 0:
                 #     assert len(raw_sample['LastUseOfVariablesInScope']) == 0
                 #     continue
