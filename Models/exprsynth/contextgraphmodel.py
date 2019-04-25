@@ -63,7 +63,7 @@ class ContextGraphModel(Model):
                         'excluded_cg_edge_types': [],
                         'cg_add_subtoken_nodes': True,
 
-                        'cg_node_label_embedding_style': 'Token',  # One of ['Token', 'CharCNN']
+                        'cg_node_label_embedding_style': 'CharCNN',  # One of ['Token', 'CharCNN']
                         'cg_node_label_vocab_size': 10000,
                         'cg_node_label_char_length': 16,
                         "cg_node_label_embedding_size": 32,
@@ -276,9 +276,9 @@ class ContextGraphModel(Model):
     @abstractmethod
     def _load_metadata_from_sample(hyperparameters: Dict[str, Any], raw_sample: Dict[str, Any], raw_metadata: Dict[str, Any]) -> None:
         super(ContextGraphModel, ContextGraphModel)._load_metadata_from_sample(hyperparameters, raw_sample, raw_metadata)
-        print(raw_sample)
-        print('\n\n')
-        print(raw_metadata)
+        # print(raw_sample)
+        # print('\n\n')
+        # print(raw_metadata)
         for label_token in raw_sample['ContextGraph']['NodeLabels'].values():
             raw_metadata['cg_node_label_counter'][label_token] += 1
 
@@ -296,14 +296,14 @@ class ContextGraphModel(Model):
 
         That's what the line below means
         '''
-        raw_sample['ContextGraph']['EdgeValues'] = {}
-        for edge_type, values in raw_sample['ContextGraph']['EdgeValues'].items():
-            if len(values) == 0:
-                continue
-            existing_edge_value_size = raw_metadata['cg_edge_value_sizes'].get(edge_type)
-            if existing_edge_value_size is not None:
-                assert existing_edge_value_size == len(values[0])
-            raw_metadata['cg_edge_value_sizes'][edge_type] = len(values[0])
+        # raw_sample['ContextGraph']['EdgeValues'] = {}
+        # for edge_type, values in raw_sample['ContextGraph']['EdgeValues'].items():
+        #     if len(values) == 0:
+        #         continue
+        #     existing_edge_value_size = raw_metadata['cg_edge_value_sizes'].get(edge_type)
+        #     if existing_edge_value_size is not None:
+        #         assert existing_edge_value_size == len(values[0])
+        #     raw_metadata['cg_edge_value_sizes'][edge_type] = len(values[0])
 
     @abstractmethod
     def _finalise_metadata(self, raw_metadata_list: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -421,6 +421,7 @@ class ContextGraphModel(Model):
                 edges = np.array(raw_sample['ContextGraph']['Edges'][e_type], dtype=np.int32)
                 result_holder['cg_edges'][e_type_idx] = edges
 
+                ## Shouldn't be getting called here here since metadata['cg_edge_value_sizes'] should be empty
                 if e_type_idx in metadata['cg_edge_value_sizes']:
                     edge_values = np.array(raw_sample['ContextGraph']['EdgeValues'][e_type], dtype=np.float32)
                     edge_values = np.array(edge_values, dtype=np.float32)

@@ -69,7 +69,10 @@ class Graph2SeqModel(ContextGraphModel):
         final_metadata = super()._finalise_metadata(raw_metadata_list)
         self._decoder_model.finalise_metadata(raw_metadata_list, final_metadata)
         final_metadata['nag_reserved_names'] = loader.get_csharp_reserved_names()
-        final_metadata['nag_reserved_names'].add("<HOLE>")
+
+        ## TODO: change <HOLE> to <SLOT>
+        # final_metadata['nag_reserved_names'].add("<HOLE>")
+        final_metadata['nag_reserved_names'].add("<SLOT>")
         return final_metadata
 
     @staticmethod
@@ -80,7 +83,9 @@ class Graph2SeqModel(ContextGraphModel):
                                is_train: bool=True) -> bool:
         keep_sample = super(Graph2SeqModel, Graph2SeqModel)._load_data_from_sample(hyperparameters, metadata, raw_sample, result_holder, is_train)
         if keep_sample:
-            result_holder['root_hole_node_id'] = raw_sample['HoleNode']
+            ## TODO: change to 'SlotDummyNode'
+            # result_holder['root_hole_node_id'] = raw_sample['HoleNode']
+            result_holder['root_hole_node_id'] = raw_sample['SlotDummyNode']
             SeqDecoder.load_data_from_sample(hyperparameters, metadata, raw_sample, result_holder, is_train)
         return keep_sample
 

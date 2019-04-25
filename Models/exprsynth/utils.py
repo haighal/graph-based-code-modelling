@@ -1,7 +1,8 @@
 import multiprocessing
-from typing import List, Iterable, Callable, TypeVar
+from typing import Dict, Any, List, Iterable, Callable, TypeVar
 
 from dpu_utils.utils import RichPath
+from dpu_utils.codeutils import split_identifier_into_parts
 
 JobType = TypeVar("JobType")
 ResultType = TypeVar("ResultType")
@@ -119,3 +120,19 @@ def run_jobs_in_parallel(all_jobs: List[JobType],
 
     for worker in workers:
         worker.join()
+
+'''
+Added to parse a raw sample in the format of the ICLR '18 paper and split it into tokens
+'''
+def extract_tokens_from_sample(raw_sample: Dict[str, Any]) -> List[str]:
+    target_var_name = None
+    for candidate in raw_sample['SymbolCandidates']:
+        if candidate['IsCorrect']:
+            target_var_name = candidate['SymbolName']
+            break
+    
+    if target_var_name is None:
+        raise ValueError('No correct symbol candidate for sample:' + str(raw_sample))
+
+    tokens = split_identifier_into_parts(target_var_name)
+    return tokens

@@ -10,7 +10,7 @@ import tensorflow as tf
 from dpu_utils.utils import RichPath, DoubleBufferedIterator, MultiWorkerCallableIterator
 from dpu_utils.codeutils.lattice.csharplattice import CSharpLattice
 
-from .utils import run_jobs_in_parallel, partition_files_by_size
+from .utils import run_jobs_in_parallel, partition_files_by_size, extract_tokens_from_sample
 
 
 ModelTestResult = namedtuple("ModelTestResult", ["ground_truth", "all_predictions"])
@@ -71,13 +71,16 @@ def make_data_file_parser(model_class: Type["Model"],
                 sample = dict()
                 sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']
 
-                prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
-                sample_token_seq = []
-                collect_token_seq(raw_sample, prod_root_node, sample_token_seq)
+                # prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
+                # sample_token_seq = []
+                # collect_token_seq(raw_sample, prod_root_node, sample_token_seq)
+
+                sample_token_seq = extract_tokens_from_sample(raw_sample)
                 sample['NumTokensInExpression'] = len(sample_token_seq)
-                if len(raw_sample['VariableUsageContexts']) == 0:
-                    assert len(raw_sample['LastUseOfVariablesInScope']) == 0
-                    continue
+                # Commenting these out because they're unrelated to out dataset
+                # if len(raw_sample['VariableUsageContexts']) == 0:
+                #     assert len(raw_sample['LastUseOfVariablesInScope']) == 0
+                #     continue
                 use_example = model_class._load_data_from_sample(hyperparameters, metadata, raw_sample=raw_sample, result_holder=sample, is_train=not for_test)
                 if add_raw_data:
                     sample['raw_data'] = raw_sample
@@ -88,7 +91,6 @@ def make_data_file_parser(model_class: Type["Model"],
         target_path.save_as_compressed_file(result_data)
         yield num_all_samples, num_used_samples
     return data_file_parser
-
 
 class Model(ABC):
     @staticmethod
@@ -604,7 +606,9 @@ class Model(ABC):
                 sample_idx += 1
 
                 loaded_train_sample = dict()
-                loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']
+                # Change 'HoleLineSpan' to 'slotTokenIdx' to count new schema
+                # loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']
+                loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['slotTokenIdx']
                 prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
                 sample_token_seq = []
                 collect_token_seq(raw_sample, prod_root_node, sample_token_seq)

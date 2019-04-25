@@ -6,8 +6,10 @@ import tensorflow as tf
 from tensorflow.python.layers import core as tflayers_core
 from dpu_utils.mlutils.vocabulary import Vocabulary
 from dpu_utils.tfutils import pick_indices_from_probs
-
 from exprsynth.model import Model, ModelTestResult, write_to_minibatch, collect_token_seq
+
+# Added import for the extract_tokens_from_sample
+from .utils import extract_tokens_from_sample
 
 START_TOKEN = '%start%'
 END_TOKEN = '%end%'
@@ -243,10 +245,14 @@ class SeqDecoder(object):
 
     @staticmethod
     def load_metadata_from_sample(raw_sample: Dict[str, Any], raw_metadata: Dict[str, Any]) -> None:
-        symbol_id_to_label = raw_sample['SymbolLabels']
+        # Old code:
+        # symbol_id_to_label = raw_sample['SymbolLabels']
 
-        for symbol_label in symbol_id_to_label.values():
-            raw_metadata['decoder_token_counter'][symbol_label] += 1
+        # for symbol_label in symbol_id_to_label.values():
+        #     raw_metadata['decoder_token_counter'][symbol_label] += 1
+        tokens = extract_tokens_from_sample(raw_sample)
+        for token in tokens:
+            raw_metadata['decoder_token_counter'][token] += 1
 
     def finalise_metadata(self, raw_metadata_list: List[Dict[str, Any]], final_metadata: Dict[str, Any]) -> None:
         # First, merge all needed information:
@@ -262,9 +268,11 @@ class SeqDecoder(object):
 
     @staticmethod
     def load_data_from_sample(hyperparameters: Dict[str, Any], metadata: Dict[str, Any], raw_sample: Dict[str, Any], result_holder: Dict[str, Any], is_train: bool=True) -> None:
-        prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
-        sample_token_seq = []
-        collect_token_seq(raw_sample, prod_root_node, sample_token_seq)
+        # prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
+        # sample_token_seq = []
+        # collect_token_seq(raw_sample, prod_root_node, sample_token_seq)
+
+        sample_token_seq = extract_tokens_from_sample(raw_sample)
 
         max_len = hyperparameters['decoder_max_target_length']
         end_token_id = metadata['decoder_token_vocab'].get_id_or_unk(END_TOKEN)
