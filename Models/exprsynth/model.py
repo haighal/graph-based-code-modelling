@@ -70,7 +70,7 @@ def make_data_file_parser(model_class: Type["Model"],
             for raw_sample in file_path.read_by_file_suffix():
                 sample = dict()
                 # Replaced HoleLineSpan with SlotTokenIdx again and Filename to filename
-                sample['Provenance'] = raw_sample['filename'] + "::" + raw_sample['SlotTokenIdx']
+                sample['Provenance'] = raw_sample['filename'] + "::" + raw_sample['slotTokenIdx']
 
                 # prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
                 # sample_token_seq = []
