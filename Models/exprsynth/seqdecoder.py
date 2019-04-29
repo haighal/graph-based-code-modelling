@@ -298,7 +298,9 @@ class SeqDecoder(object):
         batch_data['target_token_ids'].append(sample['target_token_ids'])
         batch_data['target_token_ids_mask'].append(sample['target_token_ids_mask'])
 
-    def finalise_minibatch(self, batch_data: Dict[str, Any], minibatch: Dict[tf.Tensor, Any], is_train: bool) -> None:
+    ## Change the function signature to not include the is_train argument -- seems like it's unnecessary here but should double check
+    ## is_train: bool was the last arg
+    def finalise_minibatch(self, batch_data: Dict[str, Any], minibatch: Dict[tf.Tensor, Any]) -> None:
         write_to_minibatch(minibatch, self.placeholders['target_token_ids'], batch_data['target_token_ids'])
         write_to_minibatch(minibatch, self.placeholders['target_token_ids_mask'], batch_data['target_token_ids_mask'])
 
