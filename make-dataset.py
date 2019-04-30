@@ -14,8 +14,8 @@ def copy_dir_and_rename_files(src_dir, dst_dir, copy = False):
         new_filename = filename
         if '.json.gz' not in filename:
             new_filename = filename.replace('.gz', '.json.gz')
-        # print('src:', os.path.join(src_dir, filename))
-        # print('dst:', os.path.join(dst_dir, new_filename))
+        print('src:', os.path.join(src_dir, filename))
+        print('dst:', os.path.join(dst_dir, new_filename))
         if copy:
             shutil.copyfile(os.path.join(src_dir, filename), os.path.join(dst_dir, new_filename))
 
@@ -47,8 +47,8 @@ def parse_dir(entry, copy = False):
         hierarchy_file = entry.name + '-typehierarchy.json.gz'
         src = os.path.join(entry.path, hierarchy_file)
         dst = os.path.join(OUTPUT_FOLDER, 'type-hierarchies', hierarchy_file)
-        # print('src:', src)
-        # print('dst:', dst)
+        print('src:', src)
+        print('dst:', dst)
         if not os.path.isfile(src):
             print(src)
         if copy:
