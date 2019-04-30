@@ -609,7 +609,7 @@ class Model(ABC):
                 loaded_train_sample = dict()
                 # Change 'HoleLineSpan' to 'slotTokenIdx' to count new schema, and inserted the correct code to extract the groun-truth answer
                 # loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']
-                print(raw_sample)
+                # print(raw_sample)
                 # print(raw_sample['filename'])
                 # print(raw_sample['slotTokenIdx'])
                 # print(str(raw_sample['slotTokenIdx']))
