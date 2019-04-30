@@ -609,13 +609,18 @@ class Model(ABC):
                 loaded_train_sample = dict()
                 # Change 'HoleLineSpan' to 'slotTokenIdx' to count new schema
                 # loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']
+                print(raw_sample['filename'])
+                print(raw_sample['slotTokenIdx'])
+                print(str(raw_sample['slotTokenIdx']))
                 loaded_train_sample['Provenance'] = raw_sample['filename'] + "::" + str(raw_sample['slotTokenIdx'])
-                prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
-                sample_token_seq = []
-                collect_token_seq(raw_sample, prod_root_node, sample_token_seq)
-                if len(raw_sample['VariableUsageContexts']) == 0:
-                    assert len(raw_sample['LastUseOfVariablesInScope']) == 0
-                    continue
+                
+                sample_token_seq = extract_tokens_from_sample(raw_sample)
+                # prod_root_node = min(int(v) for v in raw_sample['Productions'].keys())
+                # sample_token_seq = []
+                # collect_token_seq(raw_sample, prod_root_node, sample_token_seq)
+                # if len(raw_sample['VariableUsageContexts']) == 0:
+                #     assert len(raw_sample['LastUseOfVariablesInScope']) == 0
+                #     continue
                 loaded_test_sample = dict(loaded_train_sample)
                 use_example = self._load_data_from_sample(self.hyperparameters,
                                                           self.metadata,
