@@ -6,7 +6,7 @@ DEV_PROJECTS = ['commonmark', 'rxnet']
 TEST_PROJECTS = ['commandline', 'humanizer', 'lean']
 DATASET_PATH = 'graph-dataset'
 
-OUTPUT_FOLDER = os.path.join(DATASET_PATH, '/reorganized')
+OUTPUT_FOLDER = os.path.join(DATASET_PATH, 'reorganized')
 
 def copy_and_rename_dir(src_dir, dst_dir, copy = False):
     for filename in os.listdir(src_dir):
@@ -44,7 +44,7 @@ def parse_dir(entry, copy = False):
         hierarchy_file = os.path.join(entry.path, entry.name + '-typehierarchy.json.gz')
         dst = os.path.join(OUTPUT_FOLDER, 'type-hierarchies', hierarchy_file)
         print('src:', hierarchy_file)
-        print('dst:', hierarchy_file)
+        print('dst:', dst)
     print()
 
 
