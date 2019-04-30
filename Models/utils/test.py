@@ -27,7 +27,7 @@ from exprsynth import model_restore_helper
 def chunkify(lst: List[Any], num_chunks: int) -> List[List[Any]]:
     return [lst[i::num_chunks] for i in range(num_chunks)]
 
-
+## Have to modify this to account for different graph schema.  For now, just commented this out.
 def build_csharp_check_function(raw_sample: Dict[str, Any], expression: str) -> str:
     sample_types = raw_sample['ContextGraph']['NodeTypes']
     return_type = sample_types['0'] if sample_types['0'] != '?' else 'object'
@@ -67,13 +67,13 @@ def test_on_raw_chunks(model_path: RichPath,
         predictions = sample_result.all_predictions
         results["token_perplexities"].append(token_perplexity)
         if len(predictions) == 0:
-            write_snippet(sample_idx, build_csharp_check_function(raw_sample, '???'))  # A full error
+            #write_snippet(sample_idx, build_csharp_check_function(raw_sample, '???'))  # A full error
             return
         if token_seq_equal(predictions[0][0], sample_result.ground_truth):
             results["correct_at_1"] += 1
         if any(token_seq_equal(prediction[0], sample_result.ground_truth) for prediction in predictions[:5]):
             results["correct_at_5"] += 1
-        write_snippet(sample_idx, build_csharp_check_function(raw_sample, ' '.join(predictions[0][0])))
+        #write_snippet(sample_idx, build_csharp_check_function(raw_sample, ' '.join(predictions[0][0])))
 
     test_hyper_overrides['run_id'] = test_hyper_overrides['run_id'] + "-" + str(proc_id)
     test_hyper_overrides['gpu_device_id'] = ""
