@@ -64,7 +64,6 @@ if __name__ == "__main__":
         os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-test/unseen'))
         os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-valid'))
         os.mkdir(os.path.join(OUTPUT_FOLDER, 'type-hierarchies'))
-    entries = list(os.scandir(DATASET_PATH))
-    for entry in entries:
-        if entry.is_dir():
+    for entry in os.scandir(DATASET_PATH):
+        if entry.is_dir() and entry != 'reorganized':
             parse_dir(entry, copy)
