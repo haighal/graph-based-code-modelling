@@ -41,9 +41,10 @@ def parse_dir(entry, copy = False):
         copy_and_rename_dir(graphs_valid, valid_dst, copy)
         copy_and_rename_dir(graphs_test, test_dst, copy)
 
-        hierarchy_file = os.path.join(entry.path, entry.name + '-typehierarchy.json.gz')
+        hierarchy_file = entry.name + '-typehierarchy.json.gz'
+        src = os.path.join(entry.path, hierarchy_file)
         dst = os.path.join(OUTPUT_FOLDER, 'type-hierarchies', hierarchy_file)
-        print('src:', hierarchy_file)
+        print('src:', src)
         print('dst:', dst)
     print()
 
