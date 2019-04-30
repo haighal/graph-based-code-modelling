@@ -57,7 +57,8 @@ def parse_dir(entry, copy = False):
 
 
 if __name__ == "__main__":
-    copy = bool(sys.argv[1])
+    # copy = bool(sys.argv[1])
+    copy = len(sys.argv) > 1
     if copy:
         os.mkdir(OUTPUT_FOLDER)
         os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-train'))
