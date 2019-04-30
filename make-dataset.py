@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 ## In the actual paper they used ravendb as a dev project but it had a GPL license and wasn't released
 DEV_PROJECTS = ['commonmark', 'rxnet'] 
@@ -13,8 +14,6 @@ def copy_dir_and_rename_files(src_dir, dst_dir, copy = False):
         new_filename = filename
         if '.json.gz' not in filename:
             new_filename = filename.replace('.gz', '.json.gz')
-        else:
-            print(filename)
         print('src:', os.path.join(src_dir, filename))
         print('dst:', os.path.join(dst_dir, new_filename))
         if copy:
@@ -56,13 +55,15 @@ def parse_dir(entry, copy = False):
 
 
 if __name__ == "__main__":
-    # os.makedir(OUTPUT_FOLDER)
-    # os.makedir(os.path.join(OUTPUT_FOLDER, 'graphs-train'))
-    # os.makedir(os.path.join(OUTPUT_FOLDER, 'graphs-test'))
-    # os.makedir(os.path.join(OUTPUT_FOLDER, 'graphs-test/seen'))
-    # os.makedir(os.path.join(OUTPUT_FOLDER, 'graphs-test/unseen'))
-    # os.makedir(os.path.join(OUTPUT_FOLDER, 'graphs-valid'))
-    # os.makedir(os.path.join(OUTPUT_FOLDER, 'type-hierarchies'))
+    copy = bool(sys.argv[1])
+    if copy:
+        os.mkdir(OUTPUT_FOLDER)
+        os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-train'))
+        os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-test'))
+        os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-test/seen'))
+        os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-test/unseen'))
+        os.mkdir(os.path.join(OUTPUT_FOLDER, 'graphs-valid'))
+        os.mkdir(os.path.join(OUTPUT_FOLDER, 'type-hierarchies'))
     for entry in os.scandir(DATASET_PATH):
         if entry.is_dir():
-            parse_dir(entry)
+            parse_dir(entry, copy)
