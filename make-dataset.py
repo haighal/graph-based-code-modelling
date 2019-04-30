@@ -10,7 +10,9 @@ OUTPUT_FOLDER = os.path.join(DATASET_PATH, 'reorganized')
 
 def copy_and_rename_dir(src_dir, dst_dir, copy = False):
     for filename in os.listdir(src_dir):
-        new_filename = filename.replace('.gz', '.json.gz')
+        new_filename = filename
+        if '.json.gz' not in filename:
+            new_filename = filename.replace('.gz', '.json.gz')
         print('src:', os.path.join(src_dir, filename))
         print('dst:', os.path.join(dst_dir, new_filename))
         if copy:
