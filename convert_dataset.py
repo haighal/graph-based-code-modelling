@@ -125,7 +125,7 @@ ContextGraph
         LastUse
         LastWrite
         NextToken
-    NodeLabels - dict from node ID (as a string) to name (either the node type or the name of the variable): "We label syntax nodes with the name of the nonterminal from the program’s grammar, whereas
+    NodeLabels - dict from node ID (as a string) to name (either the node type or the name of the variable): "We label syntax nodes with the name of the nonterminal from the program's grammar, whereas
                  syntax tokens are labeled with the string that they represent"
     NodeTypes - the variable type: we don't have that
 SlotDummyNode - int corresponding to the index of the <SLOT> token in the vocabulary
