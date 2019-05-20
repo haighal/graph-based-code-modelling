@@ -220,7 +220,7 @@ if __name__ == '__main__':
     current_file = []
 
     ## Need to avoid hardcoding
-    outfile_base_name = f'{args.save_folder}/{os.path.basename(args.graphs)[-5]}'
+    outfile_base_name = f'{args.save_folder}/{os.path.basename(args.graphs)[:-5]}'
     os.makedirs(outfile_base_name)
 
     num_iters = 50000 if '50k' in args.graphs else 100000
