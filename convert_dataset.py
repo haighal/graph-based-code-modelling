@@ -4,6 +4,7 @@ import networkx as nx
 from networkx.algorithms.traversal.depth_first_search import dfs_tree
 import os
 import random
+from tqdm import tqdm
 
 '''
 **** MSR Dataset Format ****
@@ -220,23 +221,25 @@ if __name__ == '__main__':
     current_file = []
 
     ## Need to avoid hardcoding
-    outfile_base_name = f'{args.save_folder}/{os.path.basename(args.graphs)[:-5]}'
-    os.makedirs(outfile_base_name)
+    outfile_folder = '{}/{}'.format(args.save_folder, os.path.splitext(os.path.basename(args.graphs))[0])
+    os.makedirs(args.save_folder, exist_ok=True)
+    os.mkdir(outfile_folder)
 
+    ## Assume file has only 50k or 100k
     num_iters = 50000 if '50k' in args.graphs else 100000
         
-    for i in range(num_iters):
+    for i in tqdm(range(num_iters)):
         if (i + 1) % 1000 == 0:
-            print(f'Processed {i+1} ASTs')
+            print('Processed {} ASTs'.format(i+1))
         ast = json.loads(graph_file.readline())
         filename = filenames.readline()
 
         snippets = create_varnaming_samples(ast, filename, args.num_snippets, args.dmin, args.dmax)
         current_file.extend(snippets)
         if len(current_file) >= args.file_size:
-            outfile = f'{outfile_base_name}/graphs{num_files}.json'
+            outfile = '{}/graphs{}.json'.format(outfile_folder, num_files)
             with open(outfile, 'w+') as f:
-                print(f'Saving {len(current_file)} snippets to {outfile}')
+                print('Saving {} snippets to {}'.format(len(current_file), outfile))
                 json.dump(current_file, f)
                 current_file = []
                 num_files += 1
