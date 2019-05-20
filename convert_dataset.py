@@ -205,7 +205,7 @@ if __name__ == '__main__':
                         help="minimum sixe for AST subgraph to be considered a snippet")
     parser.add_argument("--dmax", dest='dmax', type=int, default=64,
                         help="minimum sixe for AST subgraph to be considered a snippet")
-    parser.add_argument("--snippets_per_file", dest='file_size', type=int, default=10000)
+    parser.add_argument("--snippets_per_file", dest='file_size', type=int, default=5000)
     args = parser.parse_args()
     
     print(args)
@@ -219,9 +219,12 @@ if __name__ == '__main__':
     current_file = []
 
     ## Need to avoid hardcoding
-    outfile_base_name = f'{args.save_folder}/python50k_eval'
+    outfile_base_name = f'{args.save_folder}/{os.path.basename(args.graphs)}'
     os.makedirs(outfile_base_name)
-    for i in range(50000):
+
+    num_iters = 50000 if '50k' in args.graphs else 100000
+        
+    for i in range(num_iters):
         if (i + 1) % 1000 == 0:
             print(f'Processed {i+1} ASTs')
         ast = json.loads(graph_file.readline())
