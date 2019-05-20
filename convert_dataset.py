@@ -19,7 +19,7 @@ ContextGraph
     syntax tokens are labeled with the string that they represent"
     NodeTypes - the variable type: we don't have that
 SlotDummyNode - int corresponding to the index of the <SLOT> token in the vocabulary
-SymbolCandidates -  list of dicts containing {"IsCorrect": true, "SymbolDummyNode": 1, "SymbolName": "parameter"}
+SymbolCandidates - list of dicts containing {"IsCorrect": true, "SymbolDummyNode": 1, "SymbolName": "parameter"}
 filename - code file that the AST came from
 slotTokenIdx - Index of token in the source file that is described by this problem instance
 
@@ -65,7 +65,7 @@ def gen_networkx_graph(ast):
             node_value = value if (value is not None) else node_type
             G.add_node(nid, label=node_value, type=node_type)
         else:
-            ## label syntax nodes with the name of the nonterminal from the program’s grammar
+            ## label syntax nodes with the name of the nonterminal from the program's grammar
             G.add_node(nid, label=node_type, type=node_type)
             for child in children:
                 edge_list += [(nid, child)]
