@@ -324,9 +324,10 @@ class ContextGraphModel(Model):
                 if existing_edge_value_size is not None:
                     assert existing_edge_value_size == edge_value_size
                 merged_edge_value_sizes[edge_type] = edge_value_size
-
         # Store edges allowed in the context graph, and assign numerical IDs to them:
+        print(merged_edge_types)
         all_used_cg_edges = list(merged_edge_types - set(self.hyperparameters['excluded_cg_edge_types']))
+        print(all_used_cg_edges)
         if self.hyperparameters.get('cg_add_subtoken_nodes', False):
             all_used_cg_edges.append(USES_SUBTOKEN_EDGE_NAME)
         final_metadata['cg_edge_type_dict'] = {e: i for i, e in enumerate(all_used_cg_edges)}
