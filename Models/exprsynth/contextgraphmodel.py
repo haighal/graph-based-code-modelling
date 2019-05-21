@@ -337,13 +337,15 @@ class ContextGraphModel(Model):
                 merged_node_label_counter,
                 max_size=self.hyperparameters['cg_node_label_vocab_size'])
 
-        final_metadata['cg_node_type_vocab'] = \
-            LatticeVocabulary.get_vocabulary_for(
-                tokens=merged_node_type_counter,
-                max_size=self.hyperparameters['cg_node_type_vocab_size'] - 1,
-                lattice=final_metadata['type_lattice'])
-        final_metadata['cg_node_type_vocab'].add_or_get_id(NO_TYPE)
-        self.hyperparameters['cg_node_type_vocab_size'] = len(final_metadata['cg_node_type_vocab'])
+        type_embedding_size = self.hyperparameters['cg_node_type_embedding_size']
+        if type_embedding_size > 0:
+            final_metadata['cg_node_type_vocab'] = \
+                LatticeVocabulary.get_vocabulary_for(
+                    tokens=merged_node_type_counter,
+                    max_size=self.hyperparameters['cg_node_type_vocab_size'] - 1,
+                    lattice=final_metadata['type_lattice'])
+            final_metadata['cg_node_type_vocab'].add_or_get_id(NO_TYPE)
+            self.hyperparameters['cg_node_type_vocab_size'] = len(final_metadata['cg_node_type_vocab'])
 
         final_metadata['cg_edge_value_sizes'] = {}
         for edge_type, edge_feature_size in merged_edge_value_sizes.items():

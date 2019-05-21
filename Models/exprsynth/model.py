@@ -245,10 +245,14 @@ class Model(ABC):
         :param raw_metadata_list: List of dictionaries used to collect the raw metadata (token counts, ...) (one per file).
         :return Finalised metadata (vocabs, ...)
         """
-        return {}
-        ## Commented the below out to make this work in python
-        # lattice_data = raw_metadata_list[0]["type_lattice_path"].read_by_file_suffix()
-        # return {"type_lattice": CSharpLattice(lattice_data['types'], lattice_data['outgoingEdges'])}
+
+        ## Ignore type lattice file if we don't have types available (e.g. python)
+        type_embedding_size = self.hyperparameters['cg_node_type_embedding_size']
+        if type_embedding_size > 0:
+            lattice_data = raw_metadata_list[0]["type_lattice_path"].read_by_file_suffix()
+            return {"type_lattice": CSharpLattice(lattice_data['types'], lattice_data['outgoingEdges'])}
+        else:
+            return {}
 
     def load_metadata(self, data_dir: RichPath, type_lattice_path: RichPath, max_num_files: Optional[int]=None) -> None:
         raw_metadata_list = []
