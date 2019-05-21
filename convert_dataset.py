@@ -5,6 +5,7 @@ from networkx.algorithms.traversal.depth_first_search import dfs_tree
 import os
 import random
 from tqdm import tqdm
+import shutil
 
 '''
 **** MSR Dataset Format ****
@@ -52,9 +53,17 @@ def dev_test_split(folder, seed=0, split = 0.5):
     files = sorted(os.listdir(folder))
     random.shuffle(files)
     
-    midpoint =int(len(files)*split)
+    split_idx =int(len(files)*split)
     dev_files = files[:split_idx]
     test_files = files[split_idx:]
+
+    os.mkdir(folder + '/dev')
+    os.mkdir(folder + '/test')
+
+    for filename in dev_files:
+        shutil.copyfile(os.path.join(folder, filename), os.path.join(folder + '/dev', new_filename))
+    for filename in test_files:
+        shutil.copyfile(os.path.join(folder, filename), os.path.join(folder + '/test', new_filename))
     return dev_files, test_files
 
 '''
