@@ -47,6 +47,16 @@ Each example is a space-delimited list of fields, where:
         - e.g. my|key,StringExression|MethodCall|Name,get|value
 '''
 
+def dev_test_split(folder, seed=0, split = 0.5):
+    random.seed(seed)
+    files = sorted(os.listdir(folder))
+    random.shuffle(files)
+    
+    midpoint =int(len(files)*split)
+    dev_files = files[:split_idx]
+    test_files = files[split_idx:]
+    return dev_files, test_files
+
 '''
 Generates a NetworkX Graph from an AST in the format provided from the Python150k Dataset
 '''
