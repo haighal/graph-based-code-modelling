@@ -61,9 +61,9 @@ def dev_test_split(folder, seed=0, split = 0.5):
     os.mkdir(folder + '/test')
 
     for filename in dev_files:
-        shutil.copyfile(os.path.join(folder, filename), os.path.join(folder + '/dev', new_filename))
+        shutil.copyfile(os.path.join(folder, filename), os.path.join(folder + '/dev', filename))
     for filename in test_files:
-        shutil.copyfile(os.path.join(folder, filename), os.path.join(folder + '/test', new_filename))
+        shutil.copyfile(os.path.join(folder, filename), os.path.join(folder + '/test', filename))
     return dev_files, test_files
 
 '''
