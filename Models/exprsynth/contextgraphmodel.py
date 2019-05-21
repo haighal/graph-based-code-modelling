@@ -276,7 +276,7 @@ class ContextGraphModel(Model):
     @abstractmethod
     def _load_metadata_from_sample(hyperparameters: Dict[str, Any], raw_sample: Dict[str, Any], raw_metadata: Dict[str, Any]) -> None:
         super(ContextGraphModel, ContextGraphModel)._load_metadata_from_sample(hyperparameters, raw_sample, raw_metadata)
-        print(raw_sample)
+        # print(raw_sample)
         # print('\n\n')
         # print(raw_metadata)
         for label_token in raw_sample['ContextGraph']['NodeLabels'].values():
