@@ -245,8 +245,10 @@ class Model(ABC):
         :param raw_metadata_list: List of dictionaries used to collect the raw metadata (token counts, ...) (one per file).
         :return Finalised metadata (vocabs, ...)
         """
-        lattice_data = raw_metadata_list[0]["type_lattice_path"].read_by_file_suffix()
-        return {"type_lattice": CSharpLattice(lattice_data['types'], lattice_data['outgoingEdges'])}
+        return {}
+        ## Commented the below out to make this work in python
+        # lattice_data = raw_metadata_list[0]["type_lattice_path"].read_by_file_suffix()
+        # return {"type_lattice": CSharpLattice(lattice_data['types'], lattice_data['outgoingEdges'])}
 
     def load_metadata(self, data_dir: RichPath, type_lattice_path: RichPath, max_num_files: Optional[int]=None) -> None:
         raw_metadata_list = []
