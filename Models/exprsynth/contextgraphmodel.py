@@ -394,24 +394,26 @@ class ContextGraphModel(Model):
                             % hyperparameters['cg_node_label_embedding_style'])
 
         # Translate node types, include supertypes:
-        max_num_types = hyperparameters['cg_node_type_max_num']
-        node_type_labels = np.full((num_nodes, max_num_types),
-                                   metadata['cg_node_type_vocab'].get_id_or_unk(NO_TYPE)[0], dtype=np.uint16)
-        node_type_labels_mask = np.zeros((num_nodes, max_num_types), dtype=np.bool)
-        node_type_labels_mask[:, 0] = True
-        for node_id, token_type in graph_node_types.items():
-            node_id = int(node_id)
-            node_types = metadata['cg_node_type_vocab'].get_id_or_unk('type:' + token_type, metadata['type_lattice'])
-            if is_train and len(node_types) > max_num_types:
-                random.shuffle(node_types,
-                               random=random.random)  # Shuffle the types so that we get a mixture of the type hierarchy and not always the same ones
-            node_types = node_types[:max_num_types]
-            num_types = len(node_types)
-            node_type_labels[node_id, :num_types] = node_types
-            node_type_labels_mask[node_id, :num_types] = True
+        # Only if the node type embedding size is nonzero
+        if hyperparameters['cg_node_type_embedding_size'] > 0:
+            max_num_types = hyperparameters['cg_node_type_max_num']
+            node_type_labels = np.full((num_nodes, max_num_types),
+                                    metadata['cg_node_type_vocab'].get_id_or_unk(NO_TYPE)[0], dtype=np.uint16)
+            node_type_labels_mask = np.zeros((num_nodes, max_num_types), dtype=np.bool)
+            node_type_labels_mask[:, 0] = True
+            for node_id, token_type in graph_node_types.items():
+                node_id = int(node_id)
+                node_types = metadata['cg_node_type_vocab'].get_id_or_unk('type:' + token_type, metadata['type_lattice'])
+                if is_train and len(node_types) > max_num_types:
+                    random.shuffle(node_types,
+                                random=random.random)  # Shuffle the types so that we get a mixture of the type hierarchy and not always the same ones
+                node_types = node_types[:max_num_types]
+                num_types = len(node_types)
+                node_type_labels[node_id, :num_types] = node_types
+                node_type_labels_mask[node_id, :num_types] = True
 
-        result_holder['cg_node_type_labels'] = node_type_labels
-        result_holder['cg_node_type_labels_mask'] = node_type_labels_mask
+            result_holder['cg_node_type_labels'] = node_type_labels
+            result_holder['cg_node_type_labels_mask'] = node_type_labels_mask
 
         # Split edges according to edge_type and count their numbers:
         result_holder['cg_edges'] = [[] for _ in metadata['cg_edge_type_dict']]
