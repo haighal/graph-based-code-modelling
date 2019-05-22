@@ -120,7 +120,7 @@ def run_test(model_path: RichPath, test_data_path: RichPath, output_folder: str,
     print('Avg Sample Perplexity: %.2f' % np.mean(token_perplexities))
     print('Std Sample Perplexity: %.2f' % np.std(token_perplexities))
     print('Accuracy@1: %.4f%%' % (float(correct_at_1) / num_samples * 100))
-    print('Accuracy@5: %.4f%%' % (float(correct_at_3) / num_samples * 100))
+    print('Accuracy@3: %.4f%%' % (float(correct_at_3) / num_samples * 100))
     print('Accuracy@5: %.4f%%' % (float(correct_at_5) / num_samples * 100))
     print('Accuracy@7: %.4f%%' % (float(correct_at_7) / num_samples * 100))
 
