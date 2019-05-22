@@ -48,7 +48,11 @@ Each example is a space-delimited list of fields, where:
         - e.g. my|key,StringExression|MethodCall|Name,get|value
 '''
 
-def dev_test_split(folder, seed=0, split = 0.5):
+'''
+After the running the main() script, call dev_test_split('py150_parsed/python50k_eval') 
+to split the eval portion into dev/test equally and reproducibly by json file
+'''
+def dev_test_split(folder, seed=0, split = 0.75):
     random.seed(seed)
     files = sorted(os.listdir(folder))
     random.shuffle(files)
@@ -117,7 +121,7 @@ def generate_snippets(G, num_snippets = 10, dmin = 10, dmax=64):
             
             ## Get all the possible variables that you could mask, only continue if there's actually a variable there
             nodes = list(subgraph.nodes(data=True))
-            variable_names = list(filter(contains_name, nodes))
+            variable_names = list(filter(is_variable, nodes))
             
             if len(variable_names) > 0:
                 snippets.append(subgraph) 
@@ -127,14 +131,17 @@ def generate_snippets(G, num_snippets = 10, dmin = 10, dmax=64):
     # print(f'Generated {len(snippets)} snippets')
     return snippets
 
-def contains_name(node):
+def is_variable(node):
+    ### want NameParam (Arg in Py2.7), NameStore, attr
     _, data = node
-    return 'Name' in data['type']
+    is_name = ('Name' in data['type']) and not ('Load' in data['type']) 
+    is_attr = data['type'] == 'attr'
+    return is_name or is_attr
 
 ## Choose node to mask based on all the ones containing names
 def choose_var_to_mask(G):
     nodes = list(G.nodes(data=True))
-    possible_slots = list(filter(contains_name, nodes))
+    possible_slots = list(filter(is_variable, nodes))
     return random.choice(possible_slots)[0]
 
 '''
@@ -226,7 +233,7 @@ if __name__ == '__main__':
                         help="minimum sixe for AST subgraph to be considered a snippet")
     parser.add_argument("--dmax", dest='dmax', type=int, default=64,
                         help="minimum sixe for AST subgraph to be considered a snippet")
-    parser.add_argument("--snippets_per_file", dest='file_size', type=int, default=5000)
+    parser.add_argument("--snippets_per_file", dest='file_size', type=int, default=200)
     args = parser.parse_args()
     
     print(args)
