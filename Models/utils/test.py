@@ -60,7 +60,9 @@ def test_on_raw_chunks(model_path: RichPath,
             f.write(content)
 
     results = {"correct_at_1": 0,
+               "correct_at_3" : 0,
                "correct_at_5": 0,
+               "correct_at_7": 0,
                "token_perplexities": []}
 
     def per_result_callback(sample_idx, token_perplexity, raw_sample, sample_result):
@@ -71,8 +73,12 @@ def test_on_raw_chunks(model_path: RichPath,
             return
         if token_seq_equal(predictions[0][0], sample_result.ground_truth):
             results["correct_at_1"] += 1
+        if any(token_seq_equal(prediction[0], sample_result.ground_truth) for prediction in predictions[:3]):
+            results["correct_at_3"] += 1
         if any(token_seq_equal(prediction[0], sample_result.ground_truth) for prediction in predictions[:5]):
             results["correct_at_5"] += 1
+        if any(token_seq_equal(prediction[0], sample_result.ground_truth) for prediction in predictions[:7]):
+            results["correct_at_7"] += 1
         #write_snippet(sample_idx, build_csharp_check_function(raw_sample, ' '.join(predictions[0][0])))
 
     test_hyper_overrides['run_id'] = test_hyper_overrides['run_id'] + "-" + str(proc_id)
@@ -80,7 +86,7 @@ def test_on_raw_chunks(model_path: RichPath,
     train_model = model_restore_helper.restore(model_path, is_train=True, hyper_overrides=test_hyper_overrides)
     model = model_restore_helper.restore(model_path, is_train=False, hyper_overrides=test_hyper_overrides)
     num_samples = model.test(test_raw_data_chunks, per_result_callback_fn=per_result_callback, train_model=train_model)
-    return num_samples, results["token_perplexities"], results["correct_at_1"], results["correct_at_5"]
+    return num_samples, results["token_perplexities"], results["correct_at_1"], results["correct_at_3"], results["correct_at_5"], results["correct_at_7"]
 
 
 def run_test(model_path: RichPath, test_data_path: RichPath, output_folder: str, num_processes: int):
@@ -100,19 +106,23 @@ def run_test(model_path: RichPath, test_data_path: RichPath, output_folder: str,
     test_jobs = [(model_path, test_hyper_overrides, output_folder, chunk_id, chunk_data_paths)
                  for chunk_id, chunk_data_paths in enumerate(chunkify(test_data_chunks, num_processes))]
     with Pool(processes=num_processes) as pool:
-        num_samples, token_perplexities, correct_at_1, correct_at_5 = zip(*pool.starmap(test_on_raw_chunks, test_jobs))
+        num_samples, token_perplexities, correct_at_1, correct_at_3, correct_at_5, correct_at_7 = zip(*pool.starmap(test_on_raw_chunks, test_jobs))
     # num_samples, token_perplexities, correct_at_1, correct_at_5 = zip(*[test_on_raw_chunks(*job) for job in test_jobs])
 
     num_samples = sum(num_samples)
     token_perplexities = np.concatenate(token_perplexities, axis=0)
     correct_at_1 = sum(correct_at_1)
+    correct_at_3 = sum(correct_at_3)
     correct_at_5 = sum(correct_at_5)
+    correct_at_7 = sum(correct_at_7)
 
     print('Num samples: %i (%i before filtering)' % (len(token_perplexities), num_samples))
     print('Avg Sample Perplexity: %.2f' % np.mean(token_perplexities))
     print('Std Sample Perplexity: %.2f' % np.std(token_perplexities))
     print('Accuracy@1: %.4f%%' % (float(correct_at_1) / num_samples * 100))
+    print('Accuracy@5: %.4f%%' % (float(correct_at_3) / num_samples * 100))
     print('Accuracy@5: %.4f%%' % (float(correct_at_5) / num_samples * 100))
+    print('Accuracy@7: %.4f%%' % (float(correct_at_7) / num_samples * 100))
 
 
 def run(arguments):
