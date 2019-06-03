@@ -1,4 +1,26 @@
-# Generative Code Modeling with Graphs
+# Learning to Represent Programs with Graphs
+
+This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich.  This was used as a baseline model in a paper currently under review.
+
+## Model
+
+Because python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some could be derived driectly, we **only use Syntax edges** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).  Note that we 
+
+## Results
+
+```
+Accuracy@1: 34.5671%
+Accuracy@3: 42.4864%
+Accuracy@5: 45.6902%
+```
+
+## Steps for Reproduction
+
+## Dataset Preparation
+
+## Modifications to the Original Repo
+
+# (Original README) Generative Code Modeling with Graphs
 
 This is the code required to reproduce experiments in two of our papers on
 modeling of programs, composed of three major components:
