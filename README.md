@@ -123,9 +123,9 @@ The Python150k dataset contains graphs in the following format (see [sample_py15
 
 - `python100k_train.txt` contains the names of files and their corresponding GitHub repos
 - `python100k_train.json` contains the ASTs of the parsed files.  Each line is a json file, and each graph is a list of (0-indexed) nodes, each represented as an object with several name/value pairs:
-    -(Required) `type`: string containing type of current AST node
-    -(Optional) `value`: string containing value (if any) of the current AST node
-    -(Optional) `children`: array of integers denoting indices of children (if any) of the current AST node. Indices are 0-based starting from the first node in the JSON file
+    - (Required) `type`: string containing type of current AST node
+    - (Optional) `value`: string containing value (if any) of the current AST node
+    - (Optional) `children`: array of integers denoting indices of children (if any) of the current AST node. Indices are 0-based starting from the first node in the JSON file
 
 ### MSR Dataset Format
 We convert it to the format of the dataset released by MSR [here](https://www.microsoft.com/en-us/download/details.aspx?id=56844).  Each file is a json object that is a list of graphs, and each graph has the following fields (see [sample_msr_graph.json]()):
