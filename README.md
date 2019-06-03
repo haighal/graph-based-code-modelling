@@ -5,12 +5,12 @@ This repo applies the model of Allamanis et al. ([Learning to Represent Programs
 ## Model
 
 ### Program Graphs
-Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some could be derived driectly, we **only use Syntax edges** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).
+Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some could be derived driectly, we **only use Syntax edges** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).  Because we don't 
 
 ### VarNaming Task
 We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then the variable name based on the combined context (and average the output representation of each `<SLOT>`).  This program graph is richer than what we use:
 - From every AST we sample 10 snippets *S*, which are defined as having between 10 and 64 nodes and usually span 2-5 lines
-- Within each snippet, we randomly choose a variable and mask it with the special `<SLOT>` token.
+- Within each snippet, we randomly choose a variable and mask it with the special `<SLOT>` token.  We then predict the variable name (also a sequence-generation task) based on the output representation of this single instance.  Note that some predictions, in particular class attributes or global variables, are not actually known to be in the scope of the code at this specific location from the snippet.
 
 In particular, we consider the following nodes as "variables": Arguments (`Name` class, `ctx = Param` nodes in the Python2.7 AST), Variable Declatations (`Name` class, `ctx = Store`), Attributes (`Attribute` class).
 
@@ -28,7 +28,7 @@ Allamanis et al. also embed terminal nodes by averaging a learned embedding for 
 
 ## Results
 
-On a python150k test set, we achieve the following accuracies
+On a python150k test set, we achieve the following accuracies:
 
 ```
 Accuracy@1: 34.5671%
@@ -38,7 +38,79 @@ Accuracy@5: 45.6902%
 
 ## Steps for Reproduction
 
-1) Do
+1) Download and unzip the python150k dataset from ETH Zurich (into the root of this repository):
+
+```
+wget http://files.srl.inf.ethz.ch/data/py150.tar.gz
+tar xvzf py150.tar.gz
+```
+
+2) Download and unzip the python150k source files:
+
+```
+cd py150
+wget http://files.srl.inf.ethz.ch/data/py150_files.tar.gz
+tar xvzf py150_files.tar.gz
+mv py150_files py150_src_files ## Apologies for unnecessarily renaming the folder
+```
+
+3) Convert the dataset from the format that the python150k graphs are provided in to the format used by the MSR model.  We use the same input graph format as the one used in the [VarMisuse dataset](https://www.microsoft.com/en-us/download/details.aspx?id=56844) released by MSR (which results in some clunky syntax because we need to store less information than they did).  This will create a folder called `py150_parsed` that contains `eval` and `test` subfolders with 10 JSON-ized and randomly masked snippets for every AST in the original dataset.
+
+```
+python convert_dataset.py -g ./py150/python50k_eval.json -f ./py150/py150_src_files/python50k_eval.txt -s py150_parsed
+python convert_dataset.py -g ./py150/python100k_train.json -f ./py150/py150_src_files/python100k_train.txt -s py150_parsed --snippets_per_file=10000
+```
+
+4) Randomly split `python50k_eval` into dev and test sets by executing the following command in the Python shell.  By default, the `dev_test_split` function sets a random seed of 0 and splits the dataset 75%/25% dev/test.
+
+```python
+from convert_dataset import dev_test_split
+dev_test_split('py150_parsed/python50k_eval')
+```
+
+5) Tensorize the data.  This uses the JSON representation of the program graphs to compute vocabularies, the
+grammar required to produce the observed expressions, and then transforms node labels from string form into tensorised form, etc.
+
+```
+python Models/utils/tensorise.py --hypers-override '{"excluded_cg_edge_types": ["LastLexicalUse", "LastUse", "LastWrite", "GuardedBy", "GuardedByNegation", "FormalArgName", "ComputedFrom", "ReturnsTo"],  "cg_node_type_embedding_size" : 0, "cg_add_subtoken_nodes" : false, "cg_ggnn_residual_connections" : {}}' --debug --model graph2seq py150_tensorized ./graph-dataset/polly/polly-typehierarchy.json.gz ./py150_parsed/python100k_train ./py150_parsed/python50k_eval/dev
+```
+
+Note that the third argument (`./graph-dataset/polly/polly-typehierarchy.json.gz` is an arbitrary placeholder to stop the program from crashing and not used at - this is the "type hierarchy" file that allows the model to incorporate variable type information.  We disable it for Python, because type information is unavailable).  The script might fail to detect the json-ized files because it expects `.json.gz` zip files.  If so, zip the files and continue:
+
+```
+gzip -r py150_parsed/python100k_train
+gzip -r py150_parsed/python50k_eval/test
+gzip -r py150_parsed/python50k_eval/dev
+```
+
+6) Train the model!
+
+```
+python Models/utils/train.py --model graph2seq --hypers-override '{"excluded_cg_edge_types": ["LastLexicalUse", "LastUse", "LastWrite", "GuardedBy", "GuardedByNegation", "FormalArgName", "ComputedFrom", "ReturnsTo"],  "cg_node_type_embedding_size" : 0, "cg_add_subtoken_nodes" : false, "cg_ggnn_residual_connections" : {}}' --run-name py150v2 Models/trained_models py150_tensorized/python100k_train py150_tensorized/dev
+```
+
+Our model converged after 212 epochs with the default hyperparameter settings.  Note that we exclude all of the Semantic edges from the program graphs and disable node type embeddings with the override parameter `"cg_node_type_embedding_size" : 0`.
+
+7) Test the model!
+
+```
+python Models/utils/test.py --num-processes 8 py150v2_py150v2_model_best.pkl.gz py150_parsed/python50k_eval/test Models/trained_models/py150v2
+```
+
+Because of some quirk in the way the `SequenceDecoder` model works (see my conversation with the authors [here](https://github.com/microsoft/graph-based-code-modelling/issues/2#issuecomment-492977056)), testing the model can take a really long time.  We sampled a random test set of 150 files from `py150_parsed/python50k_eval/test` using the following code (which creates a new directory, `py150_parsed/python50k_eval/test_small`).  We then ran the test script above but replaced the argument `py150_parsed/python50k_eval/test` with `py150_parsed/python50k_eval/test_small`
+
+```python
+import os                                                                                                                     
+import random
+import shutil                                                                                                               
+dir = 'py150_parsed/python50k_eval/test'                                                                                      
+files = os.listdir(dir)                                                                                                      
+random.seed(0)                                                                                                                
+new_files = random.sample(files, 150)                                                                                         
+os.mkdir(dir + '_small')                                                                                                      
+for file in new_files: 
+    shutil.copyfile(dir + '/' + file, dir + '_small/' + file)
+```
 
 ## Dataset Preparation
 
