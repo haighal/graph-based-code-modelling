@@ -1,12 +1,34 @@
 # Learning to Represent Programs with Graphs
 
-This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich.  This was used as a baseline model in a paper currently under review.
+This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich.  We used this as a baseline model in a paper currently under review.
 
 ## Model
 
-Because python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some could be derived driectly, we **only use Syntax edges** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).  Note that we 
+### Program Graphs
+Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some could be derived driectly, we **only use Syntax edges** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).
+
+### VarNaming Task
+We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then the variable name based on the combined context (and average the output representation of each `<SLOT>`).  This program graph is richer than what we use:
+- From every AST we sample 10 snippets *S*, which are defined as having between 10 and 64 nodes and usually span 2-5 lines
+- Within each snippet, we randomly choose a variable and mask it with the special `<SLOT>` token.
+
+In particular, we consider the following nodes as "variables": Arguments (`Name` class, `ctx = Param` nodes in the Python2.7 AST), Variable Declatations (`Name` class, `ctx = Store`), Attributes (`Attribute` class).
+
+So, in the piece of code below, the variables would be `epsilon` (attribute of the keras backend), `y_true` (as a parameter), `y_pred` (as a parameter), and `kl_div` (when it's created).  However, the later mentions of all 3 (e.g. in `y_true = K.clip(y_true, K.epsilon, 1)` or `return kl_div`) after they are instantiated or defined would be `Name` nodes with `ctx = Store` and thus not considered as variables for our task.
+
+```python
+def kullback_leibler_divergence(y_true, y_pred):
+    y_true = K.clip(y_true, K.epsilon, 1)
+    y_pred = K.clip(y_pred, K.epsilon, 1)
+    kl_div = K.sum(y_true * K.log(y_true / y_pred), axis=-1)
+    return kl_div
+```
+
+Allamanis et al. also embed terminal nodes by averaging a learned embedding for each subtoken, split by underscores/camelCase depending on the programming language convention (i.e. *E("pascal_case") = 0.5 E("pascal") + 0.5 E("case")*).  Using the authors suggestion, we instead embed nodes using a Character-Level CNN (see [Zhang et al, 2015](https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf) for background on CharCNNs).  They found in subsequent experiments that this improved their performance.
 
 ## Results
+
+On a python150k test set, we achieve the following accuracies
 
 ```
 Accuracy@1: 34.5671%
@@ -15,6 +37,8 @@ Accuracy@5: 45.6902%
 ```
 
 ## Steps for Reproduction
+
+1) Do
 
 ## Dataset Preparation
 
