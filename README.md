@@ -1,6 +1,8 @@
 # Learning to Represent Programs with Graphs
 
-This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich.  We used this as a baseline model in a paper currently under review.
+This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich; this model is used as a baseline in a paper currently under review.  
+
+This repo is a fork of [microsoft/graph-based-code-modelling](https://github.com/microsoft/graph-based-code-modelling), which has the source code for a different paper by the authors.  However, the repo contained all the pieces necessary to reproduce the model (a pipeline to tensorize program graphs, generate node embeddings using a CharCNN, perform message passing with a GGNN (`ContextGraphModel`), and output variable names using a GRU Decoder (`SeqDecoder`).  With the generous assistance of Marc Brockschmidt (@mmjb), we refactored the codebase to perform Variable Naming (instead of code generation) and work on a Python dataset.
 
 ## Model
 
@@ -35,6 +37,8 @@ Accuracy@1: 34.5671%
 Accuracy@3: 42.4864%
 Accuracy@5: 45.6902%
 ```
+
+These numbers are on a randomly sampled subset of the test dataset (described below), and we 
 
 ## Steps for Reproduction
 
@@ -114,7 +118,47 @@ for file in new_files:
 
 ## Dataset Preparation
 
+### Python150k Dataset Format
+The Python150k dataset contains graphs in the following format (see [sample_py150_graph.json]() INSERT LINK)
+
+- `python100k_train.txt` contains the names of files and their corresponding GitHub repos
+- `python100k_train.json` contains the ASTs of the parsed files.  Each line is a json file, and each graph is a list of (0-indexed) nodes, each represented as an object with several name/value pairs:
+..-(Required) `type`: string containing type of current AST node
+..-(Optional) `value`: string containing value (if any) of the current AST node
+..-(Optional) `children`: array of integers denoting indices of children (if any) of the current AST node. Indices are 0-based starting from the first node in the JSON file
+
+### MSR Dataset Format
+We convert it to the format of the dataset released by MSR [here](https://www.microsoft.com/en-us/download/details.aspx?id=56844).  Each file is a json object that is a list of graphs, and each graph has the following fields (see [sample_msr_graph.json]()):
+-ContextGraph - the main graph object
+..-Edges
+....-Child - a list of [src, dst] node IDs, which correspond to the edges of the original AST
+....-NextToken - a list of [src, dst] node IDs, which correspond to consecutive terminal nodes in the original AST
+..-NodeLabels - a dict from node ID (as a string) to name (either the node type or the name of the variable).  Per Allamanis et al., "We label syntax nodes with the name of the nonterminal from the program's grammar, whereas syntax tokens are labeled with the string that they represent"
+..-NodeTypes - this usually holds the variable type, but we just set it to be an empty dictionary (which is then ignored) because we don't have that information in Python
+..-SlotDummyNode - int corresponding to the node ID of the <SLOT> token in the vocabulary
+..-SymbolCandidates - list of dicts containing {"IsCorrect": true, "SymbolDummyNode": 1, "SymbolName": "parameter"}
+..-filename - code file that the AST came from
+..-slotTokenIdx - index of the token in the source file that is described by this problem instance.  We set it to be blank because it's mostly used for debugging and didn't want to go back into the source files to link them.
+
+### Pipeline Overview
+
+We convert the python150k dataset to the MSR format using `convert_dataset.py`.  The snippets for each graph are done by the function `create_varnaming_samples` if you want to use it on a one-off basis.  At a high level, the code does the following to each AST:
+- Converts the AST to a Python NetworkX graph (with node attribute information)
+- Generates (up to) 10 non-overlapping snippets from the AST, defined as subgraphs of the AST with between 10 and 64 nodes.  We generate these by DFS from nodes starting at the root and traversing down the tree until we arrive at a subgraph of the right size
+- Chooses a random variable (as defined in the VarNaming section above) to mask and masks it
+- Converts the NetworkX graph for the snippet to ContextGraph
+
+This is the same traversal strategy used in [codegraph-fmt](https://github.com/dtsbourg/codegraph-fmt) and in the preprint paper (the `generate_snippets` function is identical).
+
 ## Modifications to the Original Repo
+
+The base of the model used in *Learning to Represent Code with Graphs* already existed in the [original Graph-Based Code Modelling Repo](https://github.com/microsoft/graph-based-code-modelling) via the Graph2SeqModel (`models/exprsynth/Graph2SeqModel`, found [here]()).  This uses the `ContextGraphModel` introduced in *Learning to Represent Code with Graphs* to encode the graph: it embeds nodes based on their string representation and variable type information using a CharCNN then performs message passing with a Graph Gated Neural Network (GGNN) to generate an output representation for every node.  The sequence decoder then finds the output representation of the the `<SLOT>` token and uses that as the input to a GRU decoder that predicts a target string as a sequence of subtokens (e.g., the name input_stream_buffer is treated as the sequence \[input, stream, buffer\]).  This graph2seq architecture is trained using a maximum likelihood objective.
+
+Our modifications were thus primarily to the infrastructure of the codebase to rewire the data pipeline.
+
+Changing <HOLE> to <SLOT>
+
+Ignoring Variable Type Information
 
 # (Original README) Generative Code Modeling with Graphs
 
