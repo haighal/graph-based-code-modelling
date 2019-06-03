@@ -123,22 +123,22 @@ The Python150k dataset contains graphs in the following format (see [sample_py15
 
 - `python100k_train.txt` contains the names of files and their corresponding GitHub repos
 - `python100k_train.json` contains the ASTs of the parsed files.  Each line is a json file, and each graph is a list of (0-indexed) nodes, each represented as an object with several name/value pairs:
-. .-(Required) `type`: string containing type of current AST node
-. .-(Optional) `value`: string containing value (if any) of the current AST node
-. .-(Optional) `children`: array of integers denoting indices of children (if any) of the current AST node. Indices are 0-based starting from the first node in the JSON file
+    -(Required) `type`: string containing type of current AST node
+    -(Optional) `value`: string containing value (if any) of the current AST node
+    -(Optional) `children`: array of integers denoting indices of children (if any) of the current AST node. Indices are 0-based starting from the first node in the JSON file
 
 ### MSR Dataset Format
 We convert it to the format of the dataset released by MSR [here](https://www.microsoft.com/en-us/download/details.aspx?id=56844).  Each file is a json object that is a list of graphs, and each graph has the following fields (see [sample_msr_graph.json]()):
 - ContextGraph - the main graph object
-. .- Edges
-....- Child - a list of [src, dst] node IDs, which correspond to the edges of the original AST
-....- NextToken - a list of [src, dst] node IDs, which correspond to consecutive terminal nodes in the original AST
-..- NodeLabels - a dict from node ID (as a string) to name (either the node type or the name of the variable).  Per Allamanis et al., "We label syntax nodes with the name of the nonterminal from the program's grammar, whereas syntax tokens are labeled with the string that they represent"
-..- NodeTypes - this usually holds the variable type, but we just set it to be an empty dictionary (which is then ignored) because we don't have that information in Python
-..- SlotDummyNode - int corresponding to the node ID of the <SLOT> token in the vocabulary
-..- SymbolCandidates - list of dicts containing {"IsCorrect": true, "SymbolDummyNode": 1, "SymbolName": "parameter"}
-..- filename - code file that the AST came from
-..- slotTokenIdx - index of the token in the source file that is described by this problem instance.  We set it to be blank because it's mostly used for debugging and didn't want to go back into the source files to link them.
+    - Edges
+        - Child - a list of [src, dst] node IDs, which correspond to the edges of the original AST
+        - NextToken - a list of [src, dst] node IDs, which correspond to consecutive terminal nodes in the original AST
+    - NodeLabels - a dict from node ID (as a string) to name (either the node type or the name of the variable).  Per Allamanis et al., "We label syntax nodes with the name of the nonterminal from the program's grammar, whereas syntax tokens are labeled with the string that they represent"
+    - NodeTypes - this usually holds the variable type, but we just set it to be an empty dictionary (which is then ignored) because we don't have that information in Python
+- SlotDummyNode - int corresponding to the node ID of the <SLOT> token in the vocabulary
+- SymbolCandidates - list of dicts containing {"IsCorrect": true, "SymbolDummyNode": 1, "SymbolName": "parameter"}
+- filename - code file that the AST came from
+- slotTokenIdx - index of the token in the source file that is described by this problem instance.  We set it to be blank because it's mostly used for debugging and didn't want to go back into the source files to link them.
 
 ### Pipeline Overview
 
