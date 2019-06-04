@@ -1,4 +1,4 @@
-# Learning to Represent Programs with Graphs
+# Learning to Represent Programs with Graphs: Variable Naming with Graph Neural Networks
 
 This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the Variable Naming task on the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich; this model is used as a baseline in a paper currently under review.  
 
@@ -154,8 +154,10 @@ This is the same traversal strategy used in [codegraph-fmt](https://github.com/d
 
 The base of the model used in *Learning to Represent Code with Graphs* already existed in the [original Graph-Based Code Modelling Repo](https://github.com/microsoft/graph-based-code-modelling) via the Graph2SeqModel (`models/exprsynth/Graph2SeqModel`, found [here]()).  This uses the `ContextGraphModel` introduced in *Learning to Represent Code with Graphs* to encode the graph: it embeds nodes based on their string representation and variable type information using a CharCNN then performs message passing with a Graph Gated Neural Network (GGNN) to generate an output representation for every node.  The sequence decoder then finds the output representation of the the `<SLOT>` token and uses that as the input to a GRU decoder that predicts a target string as a sequence of subtokens (e.g., the name input_stream_buffer is treated as the sequence \[input, stream, buffer\]).  This graph2seq architecture is trained using a maximum likelihood objective.
 
-Our modifications were thus primarily to the infrastructure of the codebase to rewire the data pipeline.
+Our modifications were thus primarily to the infrastructure of the codebase to rewire the data pipeline.  We initially started working with a C# dataset released by Allamanis et al., so we modified the pipeline to handle graphs of this strucutre (although it would have been easier to directly convert the Python150k graphs to the original schema). 
 
+#### List of Modifications
+- Our"Models/exprsynth/contextgraphmodel.py", line 287, in _load_metadata_from_sample 
 Changing <HOLE> to <SLOT>
 
 Ignoring Variable Type Information
