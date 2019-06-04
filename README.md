@@ -7,7 +7,7 @@ This repo is a fork of [microsoft/graph-based-code-modelling](https://github.com
 ## Model
 
 ### Program Graphs
-Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some could be derived driectly, we **only use Syntax edges** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).  Because we don't 
+Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some semantic edges could be derived, we decided to **use Syntax edges only** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).  Because we don't 
 
 ### VarNaming Task
 We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then the variable name based on the combined context (and average the output representation of each `<SLOT>`).  This program graph is richer than what we use:
