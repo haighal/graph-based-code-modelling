@@ -2,3 +2,5 @@ docopt
 dpu_utils>=0.1.9
 tensorflow-gpu>=1.6
 numpy
+networkx
+tqdm
