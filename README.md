@@ -10,13 +10,16 @@ This repo is a fork of [microsoft/graph-based-code-modelling](https://github.com
 Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some semantic edges could be derived, we decided to **use Syntax edges only** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).
 
 ### VarNaming Task
-We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then the variable name based on the combined context (and average the output representation of each `<SLOT>`).  This program graph is richer than what we use:
+We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then genetates the variable name based on the combined contexts of its usages by averaging the output representation of each `<SLOT>` as the input to the decoder.  This program graph is richer than what we use:
 - From every AST we sample 10 snippets *S*, which are defined as having between 10 and 64 nodes and usually span 2-5 lines
 - Within each snippet, we randomly choose a variable and mask it with the special `<SLOT>` token.  We then predict the variable name (also a sequence-generation task) based on the output representation of this single instance.  Note that some predictions, in particular class attributes or global variables, are not actually known to be in the scope of the code at this specific location from the snippet.
 
-In particular, we consider the following nodes as "variables": Arguments (`Name` class, `ctx = Param` nodes in the Python2.7 AST), Variable Declatations (`Name` class, `ctx = Store`), Attributes (`Attribute` class).
+In particular, we consider the following nodes as "variables":
+- Arguments (`Name` class, `ctx = Param` nodes in the Python2.7 AST)
+- Variable declatations (`Name` class, `ctx = Store`)
+- Attributes (`Attribute` class)
 
-So, in the piece of code below, the variables would be `epsilon` (attribute of the keras backend), `y_true` (as a parameter), `y_pred` (as a parameter), and `kl_div` (when it's created).  However, the later mentions of all 3 (e.g. in `y_true = K.clip(y_true, K.epsilon, 1)` or `return kl_div`) after they are instantiated or defined would be `Name` nodes with `ctx = Store` and thus not considered as variables for our task.
+Concretely, in the piece of code below, the variables would be `epsilon` (attribute of the keras backend), `y_true` (as a parameter), `y_pred` (as a parameter), and `kl_div` (when it's created).  However, the later mentions of all 3 (e.g. in `y_true = K.clip(y_true, K.epsilon, 1)` or `return kl_div`) after they are instantiated or defined would be `Name` nodes with `ctx = Store` and thus not considered as variables for our task.
 
 ```python
 def kullback_leibler_divergence(y_true, y_pred):
@@ -30,7 +33,7 @@ Allamanis et al. also embed terminal nodes by averaging a learned embedding for 
 
 ## Results
 
-On a python150k test set, we achieve the following accuracies:
+On a python150k test set, we achieve the following accuracies on a randomly sampled subset of the test dataset (described below):
 
 ```
 Accuracy@1: 34.5671%
@@ -38,24 +41,26 @@ Accuracy@3: 42.4864%
 Accuracy@5: 45.6902%
 ```
 
-These numbers are on a randomly sampled subset of the test dataset (described below), and we 
+This is similar to the original authors' accuracy @1 using only Syntax edges on their C# dataset (34.3%)
 
 ## Steps for Reproduction
 
-1) Download and unzip the python150k dataset from ETH Zurich (into the root of this repository):
+1) Download and unzip the python150k dataset and python150k source files from ETH Zurich (into the root of this repository):
 
 ```
 wget http://files.srl.inf.ethz.ch/data/py150.tar.gz
 tar xvzf py150.tar.gz
-```
-
-2) Download and unzip the python150k source files:
-
-```
 cd py150
 wget http://files.srl.inf.ethz.ch/data/py150_files.tar.gz
 tar xvzf py150_files.tar.gz
 mv py150_files py150_src_files ## Apologies for unnecessarily renaming the folder
+```
+
+2) Create a virtual environment and install dependencies:
+```
+virtualenv .env (make sure it uses Python3.5+)
+.env/bin/activate
+pip install -r requirements.txt
 ```
 
 3) Convert the dataset from the format that the python150k graphs are provided in to the format used by the MSR model.  We use the same input graph format as the one used in the [VarMisuse dataset](https://www.microsoft.com/en-us/download/details.aspx?id=56844) released by MSR (which results in some clunky syntax because we need to store less information than they did).  This will create a folder called `py150_parsed` that contains `eval` and `test` subfolders with 10 JSON-ized and randomly masked snippets for every AST in the original dataset.
@@ -93,7 +98,7 @@ gzip -r py150_parsed/python50k_eval/dev
 python Models/utils/train.py --model graph2seq --hypers-override '{"excluded_cg_edge_types": ["LastLexicalUse", "LastUse", "LastWrite", "GuardedBy", "GuardedByNegation", "FormalArgName", "ComputedFrom", "ReturnsTo"],  "cg_node_type_embedding_size" : 0, "cg_add_subtoken_nodes" : false, "cg_ggnn_residual_connections" : {}}' --run-name py150v2 Models/trained_models py150_tensorized/python100k_train py150_tensorized/dev
 ```
 
-Our model converged after 212 epochs with the default hyperparameter settings.  Note that we exclude all of the Semantic edges from the program graphs and disable node type embeddings with the override parameter `"cg_node_type_embedding_size" : 0`.
+Our model converged after 260 epochs with the default hyperparameter settings.  Note that we exclude all of the Semantic edges from the program graphs and disable node type embeddings with the override parameter `"cg_node_type_embedding_size" : 0`.
 
 7) Test the model!
 
