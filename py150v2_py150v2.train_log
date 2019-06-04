@@ -1,0 +1,1507 @@
+Resuming training run py150v2 of model Graph2SeqModel with following hypers:
+{"decoder_max_target_length": 20, "decoder_rnn_hidden_size": 64, "momentum": 0.85, "cg_node_label_embedding_size": 32, "decoder_rnn_layer_num": 2, "gradient_clip": 1, "decoder_vocab_size": 3000, "cg_ggnn_hidden_size": 64, "cg_ggnn_layer_timesteps": [3, 1, 3, 1], "cg_ggnn_use_edge_msg_avg_aggregation": false, "dropout_keep_rate": 0.9, "patience": 5, "cg_ggnn_use_edge_bias": false, "run_id": "py150v2", "max_epochs": 500, "cg_node_type_max_num": 10, "learning_rate_decay": 0.98, "cg_ggnn_graph_rnn_activation": "tanh", "cg_node_type_embedding_size": 0, "cg_node_label_embedding_style": "CharCNN", "cg_node_label_vocab_size": 10000, "cg_node_label_char_length": 16, "learning_rate": 0.00025, "decoder_rnn_cell_type": "GRU", "decoder_output_use_bias": false, "optimizer": "Adam", "decoder_embedding_size": 64, "cg_ggnn_graph_rnn_cell": "GRU", "max_num_cg_nodes_in_batch": 100000, "cg_ggnn_residual_connections": {}, "cg_node_type_vocab_size": 5000, "excluded_cg_edge_types": ["LastLexicalUse", "LastUse", "LastWrite", "GuardedBy", "GuardedByNegation", "FormalArgName", "ComputedFrom", "ReturnsTo"], "cg_ggnn_use_propagation_attention": false, "seed": 0, "cg_add_subtoken_nodes": false}
+  Epoch RESUME (valid) took 67.23s [processed 4150 samples/second]
+Validation Loss on Resume: 19.113863
+==== Epoch 0 ====
+  Epoch 0 (train) took 372.29s [processed 1988 samples/second]
+ Training Loss: 12.836109
+  Epoch 0 (valid) took 61.36s [processed 4547 samples/second]
+ Validation Loss: 9.586006
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 1 ====
+  Epoch 1 (train) took 336.66s [processed 2199 samples/second]
+ Training Loss: 9.472420
+  Epoch 1 (valid) took 57.80s [processed 4827 samples/second]
+ Validation Loss: 9.164762
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 2 ====
+  Epoch 2 (train) took 296.90s [processed 2493 samples/second]
+ Training Loss: 9.124542
+  Epoch 2 (valid) took 54.76s [processed 5095 samples/second]
+ Validation Loss: 8.798304
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 3 ====
+  Epoch 3 (train) took 280.61s [processed 2638 samples/second]
+ Training Loss: 8.753021
+  Epoch 3 (valid) took 57.83s [processed 4824 samples/second]
+ Validation Loss: 8.503968
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 4 ====
+  Epoch 4 (train) took 264.87s [processed 2795 samples/second]
+ Training Loss: 8.538644
+  Epoch 4 (valid) took 61.86s [processed 4510 samples/second]
+ Validation Loss: 8.319767
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 5 ====
+  Epoch 5 (train) took 267.07s [processed 2772 samples/second]
+ Training Loss: 8.365791
+  Epoch 5 (valid) took 60.37s [processed 4621 samples/second]
+ Validation Loss: 8.142260
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 6 ====
+  Epoch 6 (train) took 249.64s [processed 2965 samples/second]
+ Training Loss: 8.201154
+  Epoch 6 (valid) took 58.71s [processed 4752 samples/second]
+ Validation Loss: 7.979673
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 7 ====
+  Epoch 7 (train) took 246.60s [processed 3002 samples/second]
+ Training Loss: 8.048970
+  Epoch 7 (valid) took 57.47s [processed 4854 samples/second]
+ Validation Loss: 7.837510
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 8 ====
+  Epoch 8 (train) took 226.14s [processed 3273 samples/second]
+ Training Loss: 7.906695
+  Epoch 8 (valid) took 55.46s [processed 5031 samples/second]
+ Validation Loss: 7.689871
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 9 ====
+  Epoch 9 (train) took 230.97s [processed 3205 samples/second]
+ Training Loss: 7.776109
+  Epoch 9 (valid) took 53.27s [processed 5237 samples/second]
+ Validation Loss: 7.568431
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 10 ====
+  Epoch 10 (train) took 222.12s [processed 3332 samples/second]
+ Training Loss: 7.671309
+  Epoch 10 (valid) took 53.31s [processed 5234 samples/second]
+ Validation Loss: 7.474579
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 11 ====
+  Epoch 11 (train) took 218.59s [processed 3386 samples/second]
+ Training Loss: 7.584035
+  Epoch 11 (valid) took 54.28s [processed 5140 samples/second]
+ Validation Loss: 7.397110
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 12 ====
+  Epoch 12 (train) took 232.78s [processed 3180 samples/second]
+ Training Loss: 7.510625
+  Epoch 12 (valid) took 56.88s [processed 4905 samples/second]
+ Validation Loss: 7.338318
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 13 ====
+  Epoch 13 (train) took 217.75s [processed 3399 samples/second]
+ Training Loss: 7.443706
+  Epoch 13 (valid) took 54.18s [processed 5150 samples/second]
+ Validation Loss: 7.273524
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 14 ====
+  Epoch 14 (train) took 221.47s [processed 3342 samples/second]
+ Training Loss: 7.383950
+  Epoch 14 (valid) took 58.34s [processed 4782 samples/second]
+ Validation Loss: 7.229563
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 15 ====
+  Epoch 15 (train) took 229.18s [processed 3230 samples/second]
+ Training Loss: 7.328883
+  Epoch 15 (valid) took 59.24s [processed 4710 samples/second]
+ Validation Loss: 7.172074
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 16 ====
+  Epoch 16 (train) took 223.71s [processed 3309 samples/second]
+ Training Loss: 7.278990
+  Epoch 16 (valid) took 57.62s [processed 4842 samples/second]
+ Validation Loss: 7.123088
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 17 ====
+  Epoch 17 (train) took 224.29s [processed 3300 samples/second]
+ Training Loss: 7.231961
+  Epoch 17 (valid) took 57.97s [processed 4813 samples/second]
+ Validation Loss: 7.078610
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 18 ====
+  Epoch 18 (train) took 215.30s [processed 3438 samples/second]
+ Training Loss: 7.191769
+  Epoch 18 (valid) took 54.69s [processed 5102 samples/second]
+ Validation Loss: 7.040983
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 19 ====
+  Epoch 19 (train) took 217.19s [processed 3408 samples/second]
+ Training Loss: 7.152029
+  Epoch 19 (valid) took 55.31s [processed 5044 samples/second]
+ Validation Loss: 6.998176
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 20 ====
+  Epoch 20 (train) took 218.88s [processed 3382 samples/second]
+ Training Loss: 7.113642
+  Epoch 20 (valid) took 57.53s [processed 4849 samples/second]
+ Validation Loss: 6.969970
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 21 ====
+  Epoch 21 (train) took 220.77s [processed 3353 samples/second]
+ Training Loss: 7.074135
+  Epoch 21 (valid) took 55.41s [processed 5035 samples/second]
+ Validation Loss: 6.927017
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 22 ====
+  Epoch 22 (train) took 212.42s [processed 3485 samples/second]
+ Training Loss: 7.039231
+  Epoch 22 (valid) took 52.63s [processed 5301 samples/second]
+ Validation Loss: 6.895790
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 23 ====
+  Epoch 23 (train) took 217.09s [processed 3410 samples/second]
+ Training Loss: 7.003611
+  Epoch 23 (valid) took 55.37s [processed 5039 samples/second]
+ Validation Loss: 6.865895
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 24 ====
+  Epoch 24 (train) took 200.52s [processed 3692 samples/second]
+ Training Loss: 6.972241
+  Epoch 24 (valid) took 49.49s [processed 5638 samples/second]
+ Validation Loss: 6.839478
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 25 ====
+  Epoch 25 (train) took 206.58s [processed 3583 samples/second]
+ Training Loss: 6.941311
+  Epoch 25 (valid) took 51.51s [processed 5416 samples/second]
+ Validation Loss: 6.808530
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 26 ====
+  Epoch 26 (train) took 205.94s [processed 3594 samples/second]
+ Training Loss: 6.913791
+  Epoch 26 (valid) took 46.75s [processed 5968 samples/second]
+ Validation Loss: 6.780448
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 27 ====
+  Epoch 27 (train) took 191.95s [processed 3856 samples/second]
+ Training Loss: 6.881785
+  Epoch 27 (valid) took 44.23s [processed 6308 samples/second]
+ Validation Loss: 6.749014
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 28 ====
+  Epoch 28 (train) took 184.67s [processed 4008 samples/second]
+ Training Loss: 6.853078
+  Epoch 28 (valid) took 45.38s [processed 6149 samples/second]
+ Validation Loss: 6.722691
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 29 ====
+  Epoch 29 (train) took 162.16s [processed 4565 samples/second]
+ Training Loss: 6.822426
+  Epoch 29 (valid) took 37.04s [processed 7533 samples/second]
+ Validation Loss: 6.699260
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 30 ====
+  Epoch 30 (train) took 157.15s [processed 4711 samples/second]
+ Training Loss: 6.793810
+  Epoch 30 (valid) took 38.20s [processed 7304 samples/second]
+ Validation Loss: 6.672217
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 31 ====
+  Epoch 31 (train) took 163.91s [processed 4516 samples/second]
+ Training Loss: 6.767472
+  Epoch 31 (valid) took 38.30s [processed 7285 samples/second]
+ Validation Loss: 6.647831
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 32 ====
+  Epoch 32 (train) took 172.55s [processed 4290 samples/second]
+ Training Loss: 6.743592
+  Epoch 32 (valid) took 39.55s [processed 7054 samples/second]
+ Validation Loss: 6.618523
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 33 ====
+  Epoch 33 (train) took 170.00s [processed 4355 samples/second]
+ Training Loss: 6.720531
+  Epoch 33 (valid) took 38.74s [processed 7202 samples/second]
+ Validation Loss: 6.598142
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 34 ====
+  Epoch 34 (train) took 171.91s [processed 4306 samples/second]
+ Training Loss: 6.693589
+  Epoch 34 (valid) took 37.38s [processed 7464 samples/second]
+ Validation Loss: 6.577096
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 35 ====
+  Epoch 35 (train) took 164.63s [processed 4496 samples/second]
+ Training Loss: 6.671382
+  Epoch 35 (valid) took 39.87s [processed 6997 samples/second]
+ Validation Loss: 6.554664
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 36 ====
+  Epoch 36 (train) took 167.66s [processed 4415 samples/second]
+ Training Loss: 6.647510
+  Epoch 36 (valid) took 40.85s [processed 6830 samples/second]
+ Validation Loss: 6.548064
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 37 ====
+  Epoch 37 (train) took 164.39s [processed 4503 samples/second]
+ Training Loss: 6.624240
+  Epoch 37 (valid) took 40.63s [processed 6867 samples/second]
+ Validation Loss: 6.518793
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 38 ====
+  Epoch 38 (train) took 171.27s [processed 4322 samples/second]
+ Training Loss: 6.605043
+  Epoch 38 (valid) took 37.03s [processed 7536 samples/second]
+ Validation Loss: 6.501522
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 39 ====
+  Epoch 39 (train) took 165.24s [processed 4480 samples/second]
+ Training Loss: 6.586318
+  Epoch 39 (valid) took 39.54s [processed 7057 samples/second]
+ Validation Loss: 6.479147
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 40 ====
+  Epoch 40 (train) took 168.47s [processed 4394 samples/second]
+ Training Loss: 6.568841
+  Epoch 40 (valid) took 37.87s [processed 7368 samples/second]
+ Validation Loss: 6.463684
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 41 ====
+  Epoch 41 (train) took 169.53s [processed 4366 samples/second]
+ Training Loss: 6.549765
+  Epoch 41 (valid) took 38.91s [processed 7171 samples/second]
+ Validation Loss: 6.453829
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 42 ====
+  Epoch 42 (train) took 171.48s [processed 4317 samples/second]
+ Training Loss: 6.532888
+  Epoch 42 (valid) took 39.64s [processed 7038 samples/second]
+ Validation Loss: 6.434041
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 43 ====
+  Epoch 43 (train) took 171.30s [processed 4321 samples/second]
+ Training Loss: 6.515696
+  Epoch 43 (valid) took 40.11s [processed 6956 samples/second]
+ Validation Loss: 6.429614
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 44 ====
+  Epoch 44 (train) took 166.95s [processed 4434 samples/second]
+ Training Loss: 6.496560
+  Epoch 44 (valid) took 39.60s [processed 7045 samples/second]
+ Validation Loss: 6.412030
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 45 ====
+  Epoch 45 (train) took 165.16s [processed 4482 samples/second]
+ Training Loss: 6.478142
+  Epoch 45 (valid) took 39.74s [processed 7022 samples/second]
+ Validation Loss: 6.386918
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 46 ====
+  Epoch 46 (train) took 169.83s [processed 4359 samples/second]
+ Training Loss: 6.462126
+  Epoch 46 (valid) took 39.24s [processed 7110 samples/second]
+ Validation Loss: 6.379961
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 47 ====
+  Epoch 47 (train) took 164.88s [processed 4490 samples/second]
+ Training Loss: 6.445941
+  Epoch 47 (valid) took 38.97s [processed 7160 samples/second]
+ Validation Loss: 6.356640
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 48 ====
+  Epoch 48 (train) took 161.37s [processed 4587 samples/second]
+ Training Loss: 6.427641
+  Epoch 48 (valid) took 39.22s [processed 7115 samples/second]
+ Validation Loss: 6.348441
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 49 ====
+  Epoch 49 (train) took 172.46s [processed 4292 samples/second]
+ Training Loss: 6.413304
+  Epoch 49 (valid) took 39.87s [processed 6998 samples/second]
+ Validation Loss: 6.328900
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 50 ====
+  Epoch 50 (train) took 171.99s [processed 4304 samples/second]
+ Training Loss: 6.396373
+  Epoch 50 (valid) took 39.98s [processed 6979 samples/second]
+ Validation Loss: 6.319461
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 51 ====
+  Epoch 51 (train) took 173.57s [processed 4265 samples/second]
+ Training Loss: 6.385048
+  Epoch 51 (valid) took 40.47s [processed 6893 samples/second]
+ Validation Loss: 6.305710
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 52 ====
+  Epoch 52 (train) took 176.08s [processed 4204 samples/second]
+ Training Loss: 6.370394
+  Epoch 52 (valid) took 40.61s [processed 6871 samples/second]
+ Validation Loss: 6.289392
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 53 ====
+  Epoch 53 (train) took 171.00s [processed 4329 samples/second]
+ Training Loss: 6.355744
+  Epoch 53 (valid) took 39.55s [processed 7054 samples/second]
+ Validation Loss: 6.284197
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 54 ====
+  Epoch 54 (train) took 174.14s [processed 4251 samples/second]
+ Training Loss: 6.340196
+  Epoch 54 (valid) took 39.84s [processed 7003 samples/second]
+ Validation Loss: 6.267144
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 55 ====
+  Epoch 55 (train) took 175.49s [processed 4218 samples/second]
+ Training Loss: 6.326028
+  Epoch 55 (valid) took 40.05s [processed 6966 samples/second]
+ Validation Loss: 6.250290
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 56 ====
+  Epoch 56 (train) took 175.45s [processed 4219 samples/second]
+ Training Loss: 6.310076
+  Epoch 56 (valid) took 40.64s [processed 6865 samples/second]
+ Validation Loss: 6.243135
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 57 ====
+  Epoch 57 (train) took 177.97s [processed 4159 samples/second]
+ Training Loss: 6.298376
+  Epoch 57 (valid) took 40.48s [processed 6892 samples/second]
+ Validation Loss: 6.234760
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 58 ====
+  Epoch 58 (train) took 175.67s [processed 4214 samples/second]
+ Training Loss: 6.283695
+  Epoch 58 (valid) took 41.83s [processed 6670 samples/second]
+ Validation Loss: 6.223081
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 59 ====
+  Epoch 59 (train) took 170.27s [processed 4347 samples/second]
+ Training Loss: 6.271217
+  Epoch 59 (valid) took 41.15s [processed 6780 samples/second]
+ Validation Loss: 6.209252
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 60 ====
+  Epoch 60 (train) took 166.04s [processed 4458 samples/second]
+ Training Loss: 6.259236
+  Epoch 60 (valid) took 39.10s [processed 7135 samples/second]
+ Validation Loss: 6.201085
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 61 ====
+  Epoch 61 (train) took 168.46s [processed 4394 samples/second]
+ Training Loss: 6.248449
+  Epoch 61 (valid) took 39.05s [processed 7144 samples/second]
+ Validation Loss: 6.189145
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 62 ====
+  Epoch 62 (train) took 169.74s [processed 4361 samples/second]
+ Training Loss: 6.234645
+  Epoch 62 (valid) took 39.38s [processed 7084 samples/second]
+ Validation Loss: 6.175723
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 63 ====
+  Epoch 63 (train) took 168.14s [processed 4403 samples/second]
+ Training Loss: 6.222027
+  Epoch 63 (valid) took 38.60s [processed 7228 samples/second]
+ Validation Loss: 6.165716
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 64 ====
+  Epoch 64 (train) took 177.55s [processed 4169 samples/second]
+ Training Loss: 6.210755
+  Epoch 64 (valid) took 40.30s [processed 6923 samples/second]
+ Validation Loss: 6.161574
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 65 ====
+  Epoch 65 (train) took 187.50s [processed 3948 samples/second]
+ Training Loss: 6.199183
+  Epoch 65 (valid) took 43.27s [processed 6448 samples/second]
+ Validation Loss: 6.150715
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 66 ====
+  Epoch 66 (train) took 190.05s [processed 3895 samples/second]
+ Training Loss: 6.188903
+  Epoch 66 (valid) took 42.55s [processed 6557 samples/second]
+ Validation Loss: 6.134884
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 67 ====
+  Epoch 67 (train) took 188.16s [processed 3934 samples/second]
+ Training Loss: 6.175099
+  Epoch 67 (valid) took 43.39s [processed 6430 samples/second]
+ Validation Loss: 6.130605
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 68 ====
+  Epoch 68 (train) took 182.34s [processed 4060 samples/second]
+ Training Loss: 6.163125
+  Epoch 68 (valid) took 44.95s [processed 6208 samples/second]
+ Validation Loss: 6.122529
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 69 ====
+  Epoch 69 (train) took 187.93s [processed 3939 samples/second]
+ Training Loss: 6.153744
+  Epoch 69 (valid) took 43.24s [processed 6452 samples/second]
+ Validation Loss: 6.116938
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 70 ====
+  Epoch 70 (train) took 187.75s [processed 3943 samples/second]
+ Training Loss: 6.142396
+  Epoch 70 (valid) took 43.81s [processed 6368 samples/second]
+ Validation Loss: 6.100612
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 71 ====
+  Epoch 71 (train) took 188.85s [processed 3920 samples/second]
+ Training Loss: 6.130633
+  Epoch 71 (valid) took 44.13s [processed 6322 samples/second]
+ Validation Loss: 6.093931
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 72 ====
+  Epoch 72 (train) took 195.08s [processed 3794 samples/second]
+ Training Loss: 6.119993
+  Epoch 72 (valid) took 42.91s [processed 6502 samples/second]
+ Validation Loss: 6.085240
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 73 ====
+  Epoch 73 (train) took 200.41s [processed 3694 samples/second]
+ Training Loss: 6.108806
+  Epoch 73 (valid) took 45.38s [processed 6148 samples/second]
+ Validation Loss: 6.080881
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 74 ====
+  Epoch 74 (train) took 199.97s [processed 3702 samples/second]
+ Training Loss: 6.100942
+  Epoch 74 (valid) took 45.91s [processed 6077 samples/second]
+ Validation Loss: 6.076227
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 75 ====
+  Epoch 75 (train) took 198.09s [processed 3737 samples/second]
+ Training Loss: 6.087950
+  Epoch 75 (valid) took 47.80s [processed 5837 samples/second]
+ Validation Loss: 6.059994
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 76 ====
+  Epoch 76 (train) took 200.41s [processed 3694 samples/second]
+ Training Loss: 6.078471
+  Epoch 76 (valid) took 44.22s [processed 6309 samples/second]
+ Validation Loss: 6.058572
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 77 ====
+  Epoch 77 (train) took 199.65s [processed 3708 samples/second]
+ Training Loss: 6.068652
+  Epoch 77 (valid) took 45.84s [processed 6087 samples/second]
+ Validation Loss: 6.046065
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 78 ====
+  Epoch 78 (train) took 197.77s [processed 3743 samples/second]
+ Training Loss: 6.060189
+  Epoch 78 (valid) took 47.08s [processed 5926 samples/second]
+ Validation Loss: 6.037588
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 79 ====
+  Epoch 79 (train) took 193.56s [processed 3824 samples/second]
+ Training Loss: 6.051848
+  Epoch 79 (valid) took 46.20s [processed 6039 samples/second]
+ Validation Loss: 6.030859
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 80 ====
+  Epoch 80 (train) took 200.48s [processed 3692 samples/second]
+ Training Loss: 6.043542
+  Epoch 80 (valid) took 45.09s [processed 6188 samples/second]
+ Validation Loss: 6.027224
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 81 ====
+  Epoch 81 (train) took 196.08s [processed 3775 samples/second]
+ Training Loss: 6.030680
+  Epoch 81 (valid) took 44.39s [processed 6285 samples/second]
+ Validation Loss: 6.017192
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 82 ====
+  Epoch 82 (train) took 191.17s [processed 3872 samples/second]
+ Training Loss: 6.026011
+  Epoch 82 (valid) took 43.35s [processed 6436 samples/second]
+ Validation Loss: 6.017151
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 83 ====
+  Epoch 83 (train) took 195.51s [processed 3786 samples/second]
+ Training Loss: 6.015989
+  Epoch 83 (valid) took 45.96s [processed 6071 samples/second]
+ Validation Loss: 6.003781
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 84 ====
+  Epoch 84 (train) took 204.23s [processed 3625 samples/second]
+ Training Loss: 6.007215
+  Epoch 84 (valid) took 46.82s [processed 5959 samples/second]
+ Validation Loss: 5.999078
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 85 ====
+  Epoch 85 (train) took 210.29s [processed 3520 samples/second]
+ Training Loss: 5.997904
+  Epoch 85 (valid) took 46.92s [processed 5946 samples/second]
+ Validation Loss: 5.985192
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 86 ====
+  Epoch 86 (train) took 206.89s [processed 3578 samples/second]
+ Training Loss: 5.988572
+  Epoch 86 (valid) took 45.68s [processed 6108 samples/second]
+ Validation Loss: 5.980244
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 87 ====
+  Epoch 87 (train) took 208.26s [processed 3554 samples/second]
+ Training Loss: 5.980809
+  Epoch 87 (valid) took 47.61s [processed 5860 samples/second]
+ Validation Loss: 5.975670
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 88 ====
+  Epoch 88 (train) took 203.94s [processed 3630 samples/second]
+ Training Loss: 5.971980
+  Epoch 88 (valid) took 46.96s [processed 5941 samples/second]
+ Validation Loss: 5.970590
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 89 ====
+  Epoch 89 (train) took 202.80s [processed 3650 samples/second]
+ Training Loss: 5.965232
+  Epoch 89 (valid) took 49.57s [processed 5628 samples/second]
+ Validation Loss: 5.958323
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 90 ====
+  Epoch 90 (train) took 201.92s [processed 3666 samples/second]
+ Training Loss: 5.954716
+  Epoch 90 (valid) took 48.60s [processed 5741 samples/second]
+ Validation Loss: 5.961795
+==== Epoch 91 ====
+  Epoch 91 (train) took 209.94s [processed 3526 samples/second]
+ Training Loss: 5.946025
+  Epoch 91 (valid) took 50.69s [processed 5504 samples/second]
+ Validation Loss: 5.950833
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 92 ====
+  Epoch 92 (train) took 206.69s [processed 3581 samples/second]
+ Training Loss: 5.937830
+  Epoch 92 (valid) took 50.36s [processed 5540 samples/second]
+ Validation Loss: 5.942183
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 93 ====
+  Epoch 93 (train) took 213.89s [processed 3461 samples/second]
+ Training Loss: 5.930512
+  Epoch 93 (valid) took 49.86s [processed 5596 samples/second]
+ Validation Loss: 5.938860
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 94 ====
+  Epoch 94 (train) took 218.44s [processed 3389 samples/second]
+ Training Loss: 5.924400
+  Epoch 94 (valid) took 52.68s [processed 5296 samples/second]
+ Validation Loss: 5.931929
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 95 ====
+  Epoch 95 (train) took 214.00s [processed 3459 samples/second]
+ Training Loss: 5.916096
+  Epoch 95 (valid) took 49.54s [processed 5632 samples/second]
+ Validation Loss: 5.929931
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 96 ====
+  Epoch 96 (train) took 211.72s [processed 3496 samples/second]
+ Training Loss: 5.909753
+  Epoch 96 (valid) took 50.48s [processed 5527 samples/second]
+ Validation Loss: 5.920607
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 97 ====
+  Epoch 97 (train) took 207.94s [processed 3560 samples/second]
+ Training Loss: 5.902992
+  Epoch 97 (valid) took 45.88s [processed 6081 samples/second]
+ Validation Loss: 5.912370
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 98 ====
+  Epoch 98 (train) took 206.54s [processed 3584 samples/second]
+ Training Loss: 5.895978
+  Epoch 98 (valid) took 47.61s [processed 5860 samples/second]
+ Validation Loss: 5.907527
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 99 ====
+  Epoch 99 (train) took 209.08s [processed 3540 samples/second]
+ Training Loss: 5.888024
+  Epoch 99 (valid) took 48.78s [processed 5720 samples/second]
+ Validation Loss: 5.909251
+==== Epoch 100 ====
+  Epoch 100 (train) took 207.01s [processed 3576 samples/second]
+ Training Loss: 5.881790
+  Epoch 100 (valid) took 46.09s [processed 6054 samples/second]
+ Validation Loss: 5.906648
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 101 ====
+  Epoch 101 (train) took 200.53s [processed 3691 samples/second]
+ Training Loss: 5.875886
+  Epoch 101 (valid) took 45.12s [processed 6184 samples/second]
+ Validation Loss: 5.897419
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 102 ====
+  Epoch 102 (train) took 194.29s [processed 3810 samples/second]
+ Training Loss: 5.868125
+  Epoch 102 (valid) took 44.81s [processed 6227 samples/second]
+ Validation Loss: 5.897493
+==== Epoch 103 ====
+  Epoch 103 (train) took 188.19s [processed 3934 samples/second]
+ Training Loss: 5.862922
+  Epoch 103 (valid) took 42.96s [processed 6494 samples/second]
+ Validation Loss: 5.884282
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 104 ====
+  Epoch 104 (train) took 191.08s [processed 3874 samples/second]
+ Training Loss: 5.856322
+  Epoch 104 (valid) took 41.79s [processed 6677 samples/second]
+ Validation Loss: 5.877414
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 105 ====
+  Epoch 105 (train) took 186.15s [processed 3977 samples/second]
+ Training Loss: 5.849733
+  Epoch 105 (valid) took 41.97s [processed 6648 samples/second]
+ Validation Loss: 5.880255
+==== Epoch 106 ====
+  Epoch 106 (train) took 187.52s [processed 3948 samples/second]
+ Training Loss: 5.841684
+  Epoch 106 (valid) took 41.00s [processed 6804 samples/second]
+ Validation Loss: 5.873628
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 107 ====
+  Epoch 107 (train) took 184.84s [processed 4005 samples/second]
+ Training Loss: 5.834109
+  Epoch 107 (valid) took 43.00s [processed 6488 samples/second]
+ Validation Loss: 5.865872
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 108 ====
+  Epoch 108 (train) took 184.20s [processed 4019 samples/second]
+ Training Loss: 5.828498
+  Epoch 108 (valid) took 41.87s [processed 6664 samples/second]
+ Validation Loss: 5.861288
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 109 ====
+  Epoch 109 (train) took 190.90s [processed 3878 samples/second]
+ Training Loss: 5.822141
+  Epoch 109 (valid) took 41.63s [processed 6702 samples/second]
+ Validation Loss: 5.858558
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 110 ====
+  Epoch 110 (train) took 186.47s [processed 3970 samples/second]
+ Training Loss: 5.817794
+  Epoch 110 (valid) took 42.31s [processed 6595 samples/second]
+ Validation Loss: 5.847372
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 111 ====
+  Epoch 111 (train) took 184.58s [processed 4010 samples/second]
+ Training Loss: 5.811646
+  Epoch 111 (valid) took 39.70s [processed 7027 samples/second]
+ Validation Loss: 5.846990
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 112 ====
+  Epoch 112 (train) took 183.36s [processed 4037 samples/second]
+ Training Loss: 5.802749
+  Epoch 112 (valid) took 41.26s [processed 6762 samples/second]
+ Validation Loss: 5.847074
+==== Epoch 113 ====
+  Epoch 113 (train) took 184.87s [processed 4004 samples/second]
+ Training Loss: 5.798989
+  Epoch 113 (valid) took 40.20s [processed 6940 samples/second]
+ Validation Loss: 5.839630
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 114 ====
+  Epoch 114 (train) took 179.31s [processed 4128 samples/second]
+ Training Loss: 5.793194
+  Epoch 114 (valid) took 40.34s [processed 6917 samples/second]
+ Validation Loss: 5.841749
+==== Epoch 115 ====
+  Epoch 115 (train) took 179.74s [processed 4119 samples/second]
+ Training Loss: 5.788279
+  Epoch 115 (valid) took 39.06s [processed 7143 samples/second]
+ Validation Loss: 5.832190
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 116 ====
+  Epoch 116 (train) took 174.93s [processed 4232 samples/second]
+ Training Loss: 5.781664
+  Epoch 116 (valid) took 39.39s [processed 7083 samples/second]
+ Validation Loss: 5.829740
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 117 ====
+  Epoch 117 (train) took 170.48s [processed 4342 samples/second]
+ Training Loss: 5.776731
+  Epoch 117 (valid) took 39.14s [processed 7128 samples/second]
+ Validation Loss: 5.824271
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 118 ====
+  Epoch 118 (train) took 160.57s [processed 4610 samples/second]
+ Training Loss: 5.771195
+  Epoch 118 (valid) took 37.05s [processed 7530 samples/second]
+ Validation Loss: 5.818732
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 119 ====
+  Epoch 119 (train) took 154.23s [processed 4800 samples/second]
+ Training Loss: 5.763021
+  Epoch 119 (valid) took 37.10s [processed 7521 samples/second]
+ Validation Loss: 5.812252
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 120 ====
+  Epoch 120 (train) took 161.42s [processed 4586 samples/second]
+ Training Loss: 5.759014
+  Epoch 120 (valid) took 37.01s [processed 7539 samples/second]
+ Validation Loss: 5.812879
+==== Epoch 121 ====
+  Epoch 121 (train) took 159.69s [processed 4636 samples/second]
+ Training Loss: 5.751397
+  Epoch 121 (valid) took 36.29s [processed 7688 samples/second]
+ Validation Loss: 5.803832
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 122 ====
+  Epoch 122 (train) took 154.59s [processed 4788 samples/second]
+ Training Loss: 5.746333
+  Epoch 122 (valid) took 36.26s [processed 7694 samples/second]
+ Validation Loss: 5.801575
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 123 ====
+  Epoch 123 (train) took 159.19s [processed 4650 samples/second]
+ Training Loss: 5.742272
+  Epoch 123 (valid) took 36.04s [processed 7742 samples/second]
+ Validation Loss: 5.807982
+==== Epoch 124 ====
+  Epoch 124 (train) took 158.86s [processed 4660 samples/second]
+ Training Loss: 5.736462
+  Epoch 124 (valid) took 36.48s [processed 7647 samples/second]
+ Validation Loss: 5.790443
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 125 ====
+  Epoch 125 (train) took 156.72s [processed 4723 samples/second]
+ Training Loss: 5.732099
+  Epoch 125 (valid) took 36.22s [processed 7703 samples/second]
+ Validation Loss: 5.790435
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 126 ====
+  Epoch 126 (train) took 157.59s [processed 4697 samples/second]
+ Training Loss: 5.725280
+  Epoch 126 (valid) took 37.40s [processed 7460 samples/second]
+ Validation Loss: 5.785650
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 127 ====
+  Epoch 127 (train) took 153.40s [processed 4826 samples/second]
+ Training Loss: 5.720368
+  Epoch 127 (valid) took 39.06s [processed 7143 samples/second]
+ Validation Loss: 5.783219
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 128 ====
+  Epoch 128 (train) took 158.04s [processed 4684 samples/second]
+ Training Loss: 5.713044
+  Epoch 128 (valid) took 37.49s [processed 7442 samples/second]
+ Validation Loss: 5.779306
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 129 ====
+  Epoch 129 (train) took 158.64s [processed 4666 samples/second]
+ Training Loss: 5.709502
+  Epoch 129 (valid) took 35.69s [processed 7818 samples/second]
+ Validation Loss: 5.779626
+==== Epoch 130 ====
+  Epoch 130 (train) took 156.09s [processed 4742 samples/second]
+ Training Loss: 5.706092
+  Epoch 130 (valid) took 39.27s [processed 7106 samples/second]
+ Validation Loss: 5.774532
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 131 ====
+  Epoch 131 (train) took 157.11s [processed 4712 samples/second]
+ Training Loss: 5.698759
+  Epoch 131 (valid) took 35.46s [processed 7867 samples/second]
+ Validation Loss: 5.768705
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 132 ====
+  Epoch 132 (train) took 157.00s [processed 4715 samples/second]
+ Training Loss: 5.694489
+  Epoch 132 (valid) took 36.92s [processed 7558 samples/second]
+ Validation Loss: 5.763015
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 133 ====
+  Epoch 133 (train) took 154.38s [processed 4795 samples/second]
+ Training Loss: 5.689373
+  Epoch 133 (valid) took 36.66s [processed 7610 samples/second]
+ Validation Loss: 5.766853
+==== Epoch 134 ====
+  Epoch 134 (train) took 159.09s [processed 4653 samples/second]
+ Training Loss: 5.683676
+  Epoch 134 (valid) took 37.94s [processed 7354 samples/second]
+ Validation Loss: 5.755596
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 135 ====
+  Epoch 135 (train) took 157.05s [processed 4714 samples/second]
+ Training Loss: 5.681675
+  Epoch 135 (valid) took 36.66s [processed 7611 samples/second]
+ Validation Loss: 5.759972
+==== Epoch 136 ====
+  Epoch 136 (train) took 158.98s [processed 4656 samples/second]
+ Training Loss: 5.675697
+  Epoch 136 (valid) took 37.95s [processed 7352 samples/second]
+ Validation Loss: 5.764320
+==== Epoch 137 ====
+  Epoch 137 (train) took 159.34s [processed 4646 samples/second]
+ Training Loss: 5.673448
+  Epoch 137 (valid) took 41.49s [processed 6725 samples/second]
+ Validation Loss: 5.747886
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 138 ====
+  Epoch 138 (train) took 162.65s [processed 4551 samples/second]
+ Training Loss: 5.665660
+  Epoch 138 (valid) took 39.05s [processed 7145 samples/second]
+ Validation Loss: 5.751192
+==== Epoch 139 ====
+  Epoch 139 (train) took 159.00s [processed 4656 samples/second]
+ Training Loss: 5.662559
+  Epoch 139 (valid) took 38.03s [processed 7337 samples/second]
+ Validation Loss: 5.742865
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 140 ====
+  Epoch 140 (train) took 165.29s [processed 4479 samples/second]
+ Training Loss: 5.657274
+  Epoch 140 (valid) took 38.34s [processed 7277 samples/second]
+ Validation Loss: 5.736092
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 141 ====
+  Epoch 141 (train) took 161.87s [processed 4573 samples/second]
+ Training Loss: 5.653607
+  Epoch 141 (valid) took 40.09s [processed 6960 samples/second]
+ Validation Loss: 5.733769
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 142 ====
+  Epoch 142 (train) took 162.91s [processed 4544 samples/second]
+ Training Loss: 5.647330
+  Epoch 142 (valid) took 37.98s [processed 7346 samples/second]
+ Validation Loss: 5.727780
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 143 ====
+  Epoch 143 (train) took 162.56s [processed 4554 samples/second]
+ Training Loss: 5.645119
+  Epoch 143 (valid) took 38.08s [processed 7327 samples/second]
+ Validation Loss: 5.729480
+==== Epoch 144 ====
+  Epoch 144 (train) took 161.53s [processed 4583 samples/second]
+ Training Loss: 5.641192
+  Epoch 144 (valid) took 38.80s [processed 7190 samples/second]
+ Validation Loss: 5.727015
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 145 ====
+  Epoch 145 (train) took 163.35s [processed 4532 samples/second]
+ Training Loss: 5.635921
+  Epoch 145 (valid) took 36.88s [processed 7566 samples/second]
+ Validation Loss: 5.727942
+==== Epoch 146 ====
+  Epoch 146 (train) took 161.10s [processed 4595 samples/second]
+ Training Loss: 5.631821
+  Epoch 146 (valid) took 37.90s [processed 7361 samples/second]
+ Validation Loss: 5.719156
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 147 ====
+  Epoch 147 (train) took 165.05s [processed 4485 samples/second]
+ Training Loss: 5.627296
+  Epoch 147 (valid) took 37.02s [processed 7536 samples/second]
+ Validation Loss: 5.713501
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 148 ====
+  Epoch 148 (train) took 164.11s [processed 4511 samples/second]
+ Training Loss: 5.624944
+  Epoch 148 (valid) took 36.38s [processed 7669 samples/second]
+ Validation Loss: 5.712765
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 149 ====
+  Epoch 149 (train) took 165.14s [processed 4483 samples/second]
+ Training Loss: 5.617756
+  Epoch 149 (valid) took 38.19s [processed 7307 samples/second]
+ Validation Loss: 5.718500
+==== Epoch 150 ====
+  Epoch 150 (train) took 163.39s [processed 4531 samples/second]
+ Training Loss: 5.613339
+  Epoch 150 (valid) took 38.52s [processed 7244 samples/second]
+ Validation Loss: 5.717419
+==== Epoch 151 ====
+  Epoch 151 (train) took 159.71s [processed 4635 samples/second]
+ Training Loss: 5.611202
+  Epoch 151 (valid) took 39.68s [processed 7032 samples/second]
+ Validation Loss: 5.703837
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 152 ====
+  Epoch 152 (train) took 164.29s [processed 4506 samples/second]
+ Training Loss: 5.604400
+  Epoch 152 (valid) took 37.47s [processed 7446 samples/second]
+ Validation Loss: 5.701340
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 153 ====
+  Epoch 153 (train) took 165.64s [processed 4469 samples/second]
+ Training Loss: 5.600415
+  Epoch 153 (valid) took 38.84s [processed 7184 samples/second]
+ Validation Loss: 5.698670
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 154 ====
+  Epoch 154 (train) took 165.11s [processed 4484 samples/second]
+ Training Loss: 5.598365
+  Epoch 154 (valid) took 38.43s [processed 7260 samples/second]
+ Validation Loss: 5.696440
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 155 ====
+  Epoch 155 (train) took 166.58s [processed 4444 samples/second]
+ Training Loss: 5.594548
+  Epoch 155 (valid) took 37.15s [processed 7510 samples/second]
+ Validation Loss: 5.698158
+==== Epoch 156 ====
+  Epoch 156 (train) took 163.81s [processed 4519 samples/second]
+ Training Loss: 5.591904
+  Epoch 156 (valid) took 37.50s [processed 7439 samples/second]
+ Validation Loss: 5.692601
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 157 ====
+  Epoch 157 (train) took 165.57s [processed 4471 samples/second]
+ Training Loss: 5.586337
+  Epoch 157 (valid) took 39.60s [processed 7046 samples/second]
+ Validation Loss: 5.689588
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 158 ====
+  Epoch 158 (train) took 168.10s [processed 4404 samples/second]
+ Training Loss: 5.582851
+  Epoch 158 (valid) took 38.19s [processed 7306 samples/second]
+ Validation Loss: 5.692185
+==== Epoch 159 ====
+  Epoch 159 (train) took 165.92s [processed 4462 samples/second]
+ Training Loss: 5.579878
+  Epoch 159 (valid) took 38.86s [processed 7179 samples/second]
+ Validation Loss: 5.682190
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 160 ====
+  Epoch 160 (train) took 171.40s [processed 4319 samples/second]
+ Training Loss: 5.573437
+  Epoch 160 (valid) took 38.06s [processed 7331 samples/second]
+ Validation Loss: 5.682416
+==== Epoch 161 ====
+  Epoch 161 (train) took 160.77s [processed 4604 samples/second]
+ Training Loss: 5.573395
+  Epoch 161 (valid) took 36.79s [processed 7584 samples/second]
+ Validation Loss: 5.677529
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 162 ====
+  Epoch 162 (train) took 160.87s [processed 4601 samples/second]
+ Training Loss: 5.565821
+  Epoch 162 (valid) took 37.68s [processed 7404 samples/second]
+ Validation Loss: 5.678501
+==== Epoch 163 ====
+  Epoch 163 (train) took 162.11s [processed 4566 samples/second]
+ Training Loss: 5.566111
+  Epoch 163 (valid) took 38.16s [processed 7311 samples/second]
+ Validation Loss: 5.677546
+==== Epoch 164 ====
+  Epoch 164 (train) took 161.02s [processed 4597 samples/second]
+ Training Loss: 5.559454
+  Epoch 164 (valid) took 36.65s [processed 7612 samples/second]
+ Validation Loss: 5.665844
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 165 ====
+  Epoch 165 (train) took 164.82s [processed 4491 samples/second]
+ Training Loss: 5.557090
+  Epoch 165 (valid) took 37.59s [processed 7423 samples/second]
+ Validation Loss: 5.668179
+==== Epoch 166 ====
+  Epoch 166 (train) took 163.75s [processed 4521 samples/second]
+ Training Loss: 5.554932
+  Epoch 166 (valid) took 37.06s [processed 7528 samples/second]
+ Validation Loss: 5.667536
+==== Epoch 167 ====
+  Epoch 167 (train) took 164.28s [processed 4506 samples/second]
+ Training Loss: 5.549318
+  Epoch 167 (valid) took 37.09s [processed 7523 samples/second]
+ Validation Loss: 5.663333
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 168 ====
+  Epoch 168 (train) took 166.70s [processed 4441 samples/second]
+ Training Loss: 5.547976
+  Epoch 168 (valid) took 37.27s [processed 7487 samples/second]
+ Validation Loss: 5.662834
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 169 ====
+  Epoch 169 (train) took 164.90s [processed 4489 samples/second]
+ Training Loss: 5.540746
+  Epoch 169 (valid) took 37.23s [processed 7495 samples/second]
+ Validation Loss: 5.667684
+==== Epoch 170 ====
+  Epoch 170 (train) took 162.91s [processed 4544 samples/second]
+ Training Loss: 5.536371
+  Epoch 170 (valid) took 36.86s [processed 7570 samples/second]
+ Validation Loss: 5.653742
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 171 ====
+  Epoch 171 (train) took 159.74s [processed 4634 samples/second]
+ Training Loss: 5.535359
+  Epoch 171 (valid) took 36.95s [processed 7551 samples/second]
+ Validation Loss: 5.649846
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 172 ====
+  Epoch 172 (train) took 161.75s [processed 4577 samples/second]
+ Training Loss: 5.532837
+  Epoch 172 (valid) took 36.64s [processed 7616 samples/second]
+ Validation Loss: 5.647315
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 173 ====
+  Epoch 173 (train) took 161.38s [processed 4587 samples/second]
+ Training Loss: 5.527883
+  Epoch 173 (valid) took 37.84s [processed 7374 samples/second]
+ Validation Loss: 5.650077
+==== Epoch 174 ====
+  Epoch 174 (train) took 159.22s [processed 4649 samples/second]
+ Training Loss: 5.525430
+  Epoch 174 (valid) took 36.39s [processed 7668 samples/second]
+ Validation Loss: 5.652447
+==== Epoch 175 ====
+  Epoch 175 (train) took 160.64s [processed 4608 samples/second]
+ Training Loss: 5.521071
+  Epoch 175 (valid) took 38.22s [processed 7301 samples/second]
+ Validation Loss: 5.651995
+==== Epoch 176 ====
+  Epoch 176 (train) took 162.29s [processed 4561 samples/second]
+ Training Loss: 5.516290
+  Epoch 176 (valid) took 37.27s [processed 7486 samples/second]
+ Validation Loss: 5.641287
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 177 ====
+  Epoch 177 (train) took 163.45s [processed 4529 samples/second]
+ Training Loss: 5.513204
+  Epoch 177 (valid) took 37.15s [processed 7510 samples/second]
+ Validation Loss: 5.639676
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 178 ====
+  Epoch 178 (train) took 164.70s [processed 4495 samples/second]
+ Training Loss: 5.512173
+  Epoch 178 (valid) took 37.30s [processed 7479 samples/second]
+ Validation Loss: 5.637544
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 179 ====
+  Epoch 179 (train) took 161.76s [processed 4576 samples/second]
+ Training Loss: 5.507439
+  Epoch 179 (valid) took 36.50s [processed 7645 samples/second]
+ Validation Loss: 5.640392
+==== Epoch 180 ====
+  Epoch 180 (train) took 162.42s [processed 4558 samples/second]
+ Training Loss: 5.503872
+  Epoch 180 (valid) took 36.94s [processed 7552 samples/second]
+ Validation Loss: 5.630894
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 181 ====
+  Epoch 181 (train) took 163.64s [processed 4524 samples/second]
+ Training Loss: 5.501585
+  Epoch 181 (valid) took 35.91s [processed 7770 samples/second]
+ Validation Loss: 5.629363
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 182 ====
+  Epoch 182 (train) took 159.95s [processed 4628 samples/second]
+ Training Loss: 5.496321
+  Epoch 182 (valid) took 35.97s [processed 7757 samples/second]
+ Validation Loss: 5.626159
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 183 ====
+  Epoch 183 (train) took 157.96s [processed 4686 samples/second]
+ Training Loss: 5.492960
+  Epoch 183 (valid) took 37.41s [processed 7457 samples/second]
+ Validation Loss: 5.626920
+==== Epoch 184 ====
+  Epoch 184 (train) took 160.78s [processed 4604 samples/second]
+ Training Loss: 5.489758
+  Epoch 184 (valid) took 38.82s [processed 7188 samples/second]
+ Validation Loss: 5.631689
+==== Epoch 185 ====
+  Epoch 185 (train) took 163.36s [processed 4531 samples/second]
+ Training Loss: 5.490112
+  Epoch 185 (valid) took 36.48s [processed 7648 samples/second]
+ Validation Loss: 5.621526
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 186 ====
+  Epoch 186 (train) took 159.72s [processed 4635 samples/second]
+ Training Loss: 5.483486
+  Epoch 186 (valid) took 36.33s [processed 7681 samples/second]
+ Validation Loss: 5.622593
+==== Epoch 187 ====
+  Epoch 187 (train) took 160.51s [processed 4612 samples/second]
+ Training Loss: 5.482762
+  Epoch 187 (valid) took 36.87s [processed 7568 samples/second]
+ Validation Loss: 5.619240
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 188 ====
+  Epoch 188 (train) took 161.80s [processed 4575 samples/second]
+ Training Loss: 5.477208
+  Epoch 188 (valid) took 37.91s [processed 7360 samples/second]
+ Validation Loss: 5.622373
+==== Epoch 189 ====
+  Epoch 189 (train) took 161.02s [processed 4597 samples/second]
+ Training Loss: 5.476980
+  Epoch 189 (valid) took 38.47s [processed 7253 samples/second]
+ Validation Loss: 5.616003
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 190 ====
+  Epoch 190 (train) took 161.74s [processed 4577 samples/second]
+ Training Loss: 5.472121
+  Epoch 190 (valid) took 38.18s [processed 7307 samples/second]
+ Validation Loss: 5.614432
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 191 ====
+  Epoch 191 (train) took 161.36s [processed 4588 samples/second]
+ Training Loss: 5.469881
+  Epoch 191 (valid) took 36.07s [processed 7736 samples/second]
+ Validation Loss: 5.610333
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 192 ====
+  Epoch 192 (train) took 165.14s [processed 4482 samples/second]
+ Training Loss: 5.467699
+  Epoch 192 (valid) took 37.93s [processed 7355 samples/second]
+ Validation Loss: 5.606464
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 193 ====
+  Epoch 193 (train) took 160.08s [processed 4624 samples/second]
+ Training Loss: 5.463693
+  Epoch 193 (valid) took 36.14s [processed 7721 samples/second]
+ Validation Loss: 5.604995
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 194 ====
+  Epoch 194 (train) took 158.12s [processed 4682 samples/second]
+ Training Loss: 5.460985
+  Epoch 194 (valid) took 36.80s [processed 7582 samples/second]
+ Validation Loss: 5.614994
+==== Epoch 195 ====
+  Epoch 195 (train) took 159.22s [processed 4649 samples/second]
+ Training Loss: 5.458130
+  Epoch 195 (valid) took 36.52s [processed 7641 samples/second]
+ Validation Loss: 5.604295
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 196 ====
+  Epoch 196 (train) took 158.73s [processed 4664 samples/second]
+ Training Loss: 5.455254
+  Epoch 196 (valid) took 36.73s [processed 7595 samples/second]
+ Validation Loss: 5.599019
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 197 ====
+  Epoch 197 (train) took 157.21s [processed 4709 samples/second]
+ Training Loss: 5.453846
+  Epoch 197 (valid) took 37.52s [processed 7436 samples/second]
+ Validation Loss: 5.600607
+==== Epoch 198 ====
+  Epoch 198 (train) took 157.82s [processed 4691 samples/second]
+ Training Loss: 5.446354
+  Epoch 198 (valid) took 35.44s [processed 7873 samples/second]
+ Validation Loss: 5.601865
+==== Epoch 199 ====
+  Epoch 199 (train) took 159.60s [processed 4638 samples/second]
+ Training Loss: 5.444500
+  Epoch 199 (valid) took 35.52s [processed 7854 samples/second]
+ Validation Loss: 5.596107
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 200 ====
+  Epoch 200 (train) took 172.84s [processed 4283 samples/second]
+ Training Loss: 5.443695
+  Epoch 200 (valid) took 38.84s [processed 7184 samples/second]
+ Validation Loss: 5.594050
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 201 ====
+  Epoch 201 (train) took 157.50s [processed 4700 samples/second]
+ Training Loss: 5.441592
+  Epoch 201 (valid) took 40.33s [processed 6918 samples/second]
+ Validation Loss: 5.590974
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 202 ====
+  Epoch 202 (train) took 174.39s [processed 4245 samples/second]
+ Training Loss: 5.436638
+  Epoch 202 (valid) took 35.39s [processed 7883 samples/second]
+ Validation Loss: 5.590326
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 203 ====
+  Epoch 203 (train) took 159.71s [processed 4635 samples/second]
+ Training Loss: 5.434620
+  Epoch 203 (valid) took 37.81s [processed 7379 samples/second]
+ Validation Loss: 5.593731
+==== Epoch 204 ====
+  Epoch 204 (train) took 161.68s [processed 4578 samples/second]
+ Training Loss: 5.430924
+  Epoch 204 (valid) took 40.06s [processed 6965 samples/second]
+ Validation Loss: 5.583834
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 205 ====
+  Epoch 205 (train) took 158.63s [processed 4667 samples/second]
+ Training Loss: 5.430154
+  Epoch 205 (valid) took 41.20s [processed 6772 samples/second]
+ Validation Loss: 5.586059
+==== Epoch 206 ====
+  Epoch 206 (train) took 161.20s [processed 4592 samples/second]
+ Training Loss: 5.428060
+  Epoch 206 (valid) took 37.59s [processed 7423 samples/second]
+ Validation Loss: 5.585465
+==== Epoch 207 ====
+  Epoch 207 (train) took 160.65s [processed 4608 samples/second]
+ Training Loss: 5.422998
+  Epoch 207 (valid) took 38.90s [processed 7172 samples/second]
+ Validation Loss: 5.580148
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 208 ====
+  Epoch 208 (train) took 159.37s [processed 4645 samples/second]
+ Training Loss: 5.418085
+  Epoch 208 (valid) took 37.88s [processed 7366 samples/second]
+ Validation Loss: 5.580382
+==== Epoch 209 ====
+  Epoch 209 (train) took 158.90s [processed 4658 samples/second]
+ Training Loss: 5.420009
+  Epoch 209 (valid) took 38.08s [processed 7328 samples/second]
+ Validation Loss: 5.577779
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 210 ====
+  Epoch 210 (train) took 159.38s [processed 4645 samples/second]
+ Training Loss: 5.416960
+  Epoch 210 (valid) took 39.34s [processed 7092 samples/second]
+ Validation Loss: 5.574177
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 211 ====
+  Epoch 211 (train) took 158.03s [processed 4684 samples/second]
+ Training Loss: 5.412858
+  Epoch 211 (valid) took 39.48s [processed 7066 samples/second]
+ Validation Loss: 5.582217
+==== Epoch 212 ====
+  Epoch 212 (train) took 159.23s [processed 4649 samples/second]
+ Training Loss: 5.409257
+  Epoch 212 (valid) took 38.03s [processed 7337 samples/second]
+ Validation Loss: 5.570355
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 213 ====
+  Epoch 213 (train) took 158.43s [processed 4672 samples/second]
+ Training Loss: 5.406803
+  Epoch 213 (valid) took 39.45s [processed 7073 samples/second]
+ Validation Loss: 5.568921
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 214 ====
+  Epoch 214 (train) took 159.33s [processed 4646 samples/second]
+ Training Loss: 5.405107
+  Epoch 214 (valid) took 37.92s [processed 7357 samples/second]
+ Validation Loss: 5.577946
+==== Epoch 215 ====
+  Epoch 215 (train) took 158.62s [processed 4667 samples/second]
+ Training Loss: 5.400832
+  Epoch 215 (valid) took 38.41s [processed 7263 samples/second]
+ Validation Loss: 5.573699
+==== Epoch 216 ====
+  Epoch 216 (train) took 160.56s [processed 4610 samples/second]
+ Training Loss: 5.400737
+  Epoch 216 (valid) took 38.56s [processed 7237 samples/second]
+ Validation Loss: 5.578307
+==== Epoch 217 ====
+  Epoch 217 (train) took 159.79s [processed 4633 samples/second]
+ Training Loss: 5.396350
+  Epoch 217 (valid) took 37.78s [processed 7385 samples/second]
+ Validation Loss: 5.564113
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 218 ====
+  Epoch 218 (train) took 155.99s [processed 4746 samples/second]
+ Training Loss: 5.393937
+  Epoch 218 (valid) took 37.13s [processed 7514 samples/second]
+ Validation Loss: 5.562190
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 219 ====
+  Epoch 219 (train) took 156.41s [processed 4733 samples/second]
+ Training Loss: 5.390638
+  Epoch 219 (valid) took 37.00s [processed 7542 samples/second]
+ Validation Loss: 5.564525
+==== Epoch 220 ====
+  Epoch 220 (train) took 157.10s [processed 4712 samples/second]
+ Training Loss: 5.387975
+  Epoch 220 (valid) took 36.36s [processed 7673 samples/second]
+ Validation Loss: 5.569601
+==== Epoch 221 ====
+  Epoch 221 (train) took 156.23s [processed 4738 samples/second]
+ Training Loss: 5.386832
+  Epoch 221 (valid) took 36.17s [processed 7713 samples/second]
+ Validation Loss: 5.559549
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 222 ====
+  Epoch 222 (train) took 154.68s [processed 4786 samples/second]
+ Training Loss: 5.384075
+  Epoch 222 (valid) took 35.93s [processed 7765 samples/second]
+ Validation Loss: 5.555837
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 223 ====
+  Epoch 223 (train) took 148.60s [processed 4981 samples/second]
+ Training Loss: 5.380011
+  Epoch 223 (valid) took 37.62s [processed 7417 samples/second]
+ Validation Loss: 5.554311
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 224 ====
+  Epoch 224 (train) took 148.75s [processed 4977 samples/second]
+ Training Loss: 5.379950
+  Epoch 224 (valid) took 36.87s [processed 7568 samples/second]
+ Validation Loss: 5.553430
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 225 ====
+  Epoch 225 (train) took 154.63s [processed 4787 samples/second]
+ Training Loss: 5.377415
+  Epoch 225 (valid) took 37.14s [processed 7513 samples/second]
+ Validation Loss: 5.552390
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 226 ====
+  Epoch 226 (train) took 154.34s [processed 4796 samples/second]
+ Training Loss: 5.372491
+  Epoch 226 (valid) took 36.11s [processed 7727 samples/second]
+ Validation Loss: 5.554459
+==== Epoch 227 ====
+  Epoch 227 (train) took 150.33s [processed 4924 samples/second]
+ Training Loss: 5.370875
+  Epoch 227 (valid) took 34.81s [processed 8014 samples/second]
+ Validation Loss: 5.549100
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 228 ====
+  Epoch 228 (train) took 147.32s [processed 5025 samples/second]
+ Training Loss: 5.371898
+  Epoch 228 (valid) took 34.06s [processed 8192 samples/second]
+ Validation Loss: 5.550992
+==== Epoch 229 ====
+  Epoch 229 (train) took 148.37s [processed 4989 samples/second]
+ Training Loss: 5.367519
+  Epoch 229 (valid) took 35.02s [processed 7967 samples/second]
+ Validation Loss: 5.547977
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 230 ====
+  Epoch 230 (train) took 147.61s [processed 5015 samples/second]
+ Training Loss: 5.363253
+  Epoch 230 (valid) took 36.18s [processed 7712 samples/second]
+ Validation Loss: 5.550257
+==== Epoch 231 ====
+  Epoch 231 (train) took 151.80s [processed 4876 samples/second]
+ Training Loss: 5.362526
+  Epoch 231 (valid) took 35.59s [processed 7840 samples/second]
+ Validation Loss: 5.543030
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 232 ====
+  Epoch 232 (train) took 154.42s [processed 4794 samples/second]
+ Training Loss: 5.362756
+  Epoch 232 (valid) took 37.77s [processed 7386 samples/second]
+ Validation Loss: 5.541631
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 233 ====
+  Epoch 233 (train) took 149.27s [processed 4959 samples/second]
+ Training Loss: 5.361934
+  Epoch 233 (valid) took 35.15s [processed 7937 samples/second]
+ Validation Loss: 5.543426
+==== Epoch 234 ====
+  Epoch 234 (train) took 150.97s [processed 4903 samples/second]
+ Training Loss: 5.357592
+  Epoch 234 (valid) took 36.95s [processed 7551 samples/second]
+ Validation Loss: 5.541566
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 235 ====
+  Epoch 235 (train) took 150.01s [processed 4935 samples/second]
+ Training Loss: 5.355054
+  Epoch 235 (valid) took 35.87s [processed 7778 samples/second]
+ Validation Loss: 5.542449
+==== Epoch 236 ====
+  Epoch 236 (train) took 150.02s [processed 4934 samples/second]
+ Training Loss: 5.350288
+  Epoch 236 (valid) took 36.69s [processed 7605 samples/second]
+ Validation Loss: 5.550098
+==== Epoch 237 ====
+  Epoch 237 (train) took 149.49s [processed 4952 samples/second]
+ Training Loss: 5.347474
+  Epoch 237 (valid) took 35.83s [processed 7787 samples/second]
+ Validation Loss: 5.537292
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 238 ====
+  Epoch 238 (train) took 152.36s [processed 4859 samples/second]
+ Training Loss: 5.346569
+  Epoch 238 (valid) took 36.29s [processed 7688 samples/second]
+ Validation Loss: 5.536768
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 239 ====
+  Epoch 239 (train) took 149.83s [processed 4941 samples/second]
+ Training Loss: 5.343679
+  Epoch 239 (valid) took 35.87s [processed 7778 samples/second]
+ Validation Loss: 5.530684
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 240 ====
+  Epoch 240 (train) took 152.60s [processed 4851 samples/second]
+ Training Loss: 5.343970
+  Epoch 240 (valid) took 35.65s [processed 7826 samples/second]
+ Validation Loss: 5.533268
+==== Epoch 241 ====
+  Epoch 241 (train) took 149.08s [processed 4965 samples/second]
+ Training Loss: 5.339408
+  Epoch 241 (valid) took 37.52s [processed 7436 samples/second]
+ Validation Loss: 5.529808
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 242 ====
+  Epoch 242 (train) took 147.50s [processed 5019 samples/second]
+ Training Loss: 5.335999
+  Epoch 242 (valid) took 36.57s [processed 7629 samples/second]
+ Validation Loss: 5.528768
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 243 ====
+  Epoch 243 (train) took 152.63s [processed 4850 samples/second]
+ Training Loss: 5.337325
+  Epoch 243 (valid) took 35.90s [processed 7773 samples/second]
+ Validation Loss: 5.524801
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 244 ====
+  Epoch 244 (train) took 148.93s [processed 4970 samples/second]
+ Training Loss: 5.333392
+  Epoch 244 (valid) took 34.51s [processed 8084 samples/second]
+ Validation Loss: 5.529105
+==== Epoch 245 ====
+  Epoch 245 (train) took 151.21s [processed 4896 samples/second]
+ Training Loss: 5.330388
+  Epoch 245 (valid) took 35.82s [processed 7788 samples/second]
+ Validation Loss: 5.527786
+==== Epoch 246 ====
+  Epoch 246 (train) took 150.90s [processed 4906 samples/second]
+ Training Loss: 5.329721
+  Epoch 246 (valid) took 35.78s [processed 7798 samples/second]
+ Validation Loss: 5.525048
+==== Epoch 247 ====
+  Epoch 247 (train) took 148.35s [processed 4990 samples/second]
+ Training Loss: 5.329826
+  Epoch 247 (valid) took 35.72s [processed 7811 samples/second]
+ Validation Loss: 5.524853
+==== Epoch 248 ====
+  Epoch 248 (train) took 177.71s [processed 4165 samples/second]
+ Training Loss: 5.322993
+  Epoch 248 (valid) took 45.85s [processed 6085 samples/second]
+ Validation Loss: 5.523432
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 249 ====
+  Epoch 249 (train) took 191.94s [processed 3857 samples/second]
+ Training Loss: 5.324309
+  Epoch 249 (valid) took 47.54s [processed 5869 samples/second]
+ Validation Loss: 5.523855
+==== Epoch 250 ====
+  Epoch 250 (train) took 190.20s [processed 3892 samples/second]
+ Training Loss: 5.318147
+  Epoch 250 (valid) took 48.94s [processed 5701 samples/second]
+ Validation Loss: 5.519322
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 251 ====
+  Epoch 251 (train) took 187.99s [processed 3938 samples/second]
+ Training Loss: 5.318806
+  Epoch 251 (valid) took 50.08s [processed 5571 samples/second]
+ Validation Loss: 5.517968
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 252 ====
+  Epoch 252 (train) took 187.93s [processed 3939 samples/second]
+ Training Loss: 5.314113
+  Epoch 252 (valid) took 50.26s [processed 5551 samples/second]
+ Validation Loss: 5.515414
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 253 ====
+  Epoch 253 (train) took 189.32s [processed 3910 samples/second]
+ Training Loss: 5.315154
+  Epoch 253 (valid) took 48.87s [processed 5708 samples/second]
+ Validation Loss: 5.514243
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 254 ====
+  Epoch 254 (train) took 179.12s [processed 4133 samples/second]
+ Training Loss: 5.312063
+  Epoch 254 (valid) took 47.86s [processed 5830 samples/second]
+ Validation Loss: 5.512271
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 255 ====
+  Epoch 255 (train) took 184.89s [processed 4004 samples/second]
+ Training Loss: 5.308583
+  Epoch 255 (valid) took 45.95s [processed 6072 samples/second]
+ Validation Loss: 5.507241
+  Best result so far -- saving model as './py150v2_py150v2_model_best.pkl.gz'.
+==== Epoch 256 ====
+  Epoch 256 (train) took 180.60s [processed 4099 samples/second]
+ Training Loss: 5.308223
+  Epoch 256 (valid) took 47.01s [processed 5935 samples/second]
+ Validation Loss: 5.519141
+==== Epoch 257 ====
+  Epoch 257 (train) took 194.43s [processed 3807 samples/second]
+ Training Loss: 5.306575
+  Epoch 257 (valid) took 50.89s [processed 5482 samples/second]
+ Validation Loss: 5.514490
+==== Epoch 258 ====
+  Epoch 258 (train) took 196.98s [processed 3758 samples/second]
+ Training Loss: 5.304847
+  Epoch 258 (valid) took 47.37s [processed 5889 samples/second]
+ Validation Loss: 5.513497
+==== Epoch 259 ====
+  Epoch 259 (train) took 192.68s [processed 3842 samples/second]
+ Training Loss: 5.302298
+  Epoch 259 (valid) took 46.62s [processed 5985 samples/second]
+ Validation Loss: 5.523516
+==== Epoch 260 ====
+  Epoch 260 (train) took 185.30s [processed 3995 samples/second]
+ Training Loss: 5.299674
+  Epoch 260 (valid) took 46.01s [processed 6064 samples/second]
+ Validation Loss: 5.511400
