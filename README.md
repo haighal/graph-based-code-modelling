@@ -43,7 +43,7 @@ Accuracy@5: 45.6902%
 
 This is similar to the original authors' accuracy @1 using only Syntax edges on their C# dataset (34.3%).
 
-Sample predictions are available in `py150v2.test_log`.  We also include the training log in `py150v2.train_log` and the pretrained model in py150v2_py150v2_model_best.pkl.gz
+Sample predictions are available in `py150v2.test_log`.  We also include the training log in `py150v2.train_log` and the pretrained model in `py150v2_py150v2_model_best.pkl.gz`
 
 ## Steps for Reproduction
 
