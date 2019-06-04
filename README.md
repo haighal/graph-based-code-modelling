@@ -157,11 +157,17 @@ The base of the model used in *Learning to Represent Code with Graphs* already e
 Our modifications were thus primarily to the infrastructure of the codebase to rewire the data pipeline.  We initially started working with a C# dataset released by Allamanis et al., so we modified the pipeline to handle graphs of this strucutre (although it would have been easier to directly convert the Python150k graphs to the original schema). 
 
 #### List of Modifications
-- Our"Models/exprsynth/contextgraphmodel.py", line 287, in _load_metadata_from_sample 
-Changing <HOLE> to <SLOT>
-
-Ignoring Variable Type Information
-
+- Our graphs don't have edge values or weights.  Removed the reference to `raw_sample['ContextGraph']['EdgeValues']` in  `"Models/exprsynth/contextgraphmodel.py", line 287, in _load_metadata_from_sample`
+- We're generating a string rather than completing the program graph.  We thus don't have the field `raw_sample['SymbolLabels']` and remove calls to it.  To generate the ground truth sequence, we:
+    - Use `dpu_utils.codeutils.split_identifier_into_parts` to split variable names into subtokens in `load_metadata_from_sample` and then use the resulting tokens to update the `decoder_token_counter`
+    - We do the same thing in `load_data_from_sample` instead of calling `collect_token_seq` (and just remove `collect_token_seq` and calls to `raw_sample["Productions"]`)
+    - These are both implemented in the method `extract_tokens_from_sample` in `Models/exprsynth/utils.py`
+- We change every instance of the string `"<HOLE>"` to `"<SLOT>"`, `"HoleNode"` to `"SlotDummyNode"`, and `"HoleLineSpan"` to `"SlotDummyNode"` (just a product of the different schema)
+- Removed a couple calls to fields that didn't exist in our schema that were unnecessary for the task (e.g. `loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']` and `rite_snippet(sample_idx, build_csharp_check_function(raw_sample, ' '.join(predictions[0][0])))` in `Models/utils/test.py`
+- Removed `is_train` argument on `SeqDecoder.finalise_minibatch()` since it isn't used
+- To ignore Variable Type Information:
+    - Guarded references to the  `TypeLattice` in lines 249 in `Models/exprsynth/model.py` and 344 and 399 in `Models/exprsynth/contextgraphmodel.py` with `if hyperparameters['cg_node_type_embedding_size'] > 0:`
+    
 # (Original README) Generative Code Modeling with Graphs
 
 This is the code required to reproduce experiments in two of our papers on
