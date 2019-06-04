@@ -10,13 +10,16 @@ This repo is a fork of [microsoft/graph-based-code-modelling](https://github.com
 Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some semantic edges could be derived, we decided to **use Syntax edges only** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).
 
 ### VarNaming Task
-We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then the variable name based on the combined context (and average the output representation of each `<SLOT>`).  This program graph is richer than what we use:
+We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then genetates the variable name based on the combined contexts of its usages by averaging the output representation of each `<SLOT>` as the input to the decoder.  This program graph is richer than what we use:
 - From every AST we sample 10 snippets *S*, which are defined as having between 10 and 64 nodes and usually span 2-5 lines
 - Within each snippet, we randomly choose a variable and mask it with the special `<SLOT>` token.  We then predict the variable name (also a sequence-generation task) based on the output representation of this single instance.  Note that some predictions, in particular class attributes or global variables, are not actually known to be in the scope of the code at this specific location from the snippet.
 
-In particular, we consider the following nodes as "variables": Arguments (`Name` class, `ctx = Param` nodes in the Python2.7 AST), Variable Declatations (`Name` class, `ctx = Store`), Attributes (`Attribute` class).
+In particular, we consider the following nodes as "variables":
+- Arguments (`Name` class, `ctx = Param` nodes in the Python2.7 AST)
+- Variable declatations (`Name` class, `ctx = Store`)
+- Attributes (`Attribute` class)
 
-So, in the piece of code below, the variables would be `epsilon` (attribute of the keras backend), `y_true` (as a parameter), `y_pred` (as a parameter), and `kl_div` (when it's created).  However, the later mentions of all 3 (e.g. in `y_true = K.clip(y_true, K.epsilon, 1)` or `return kl_div`) after they are instantiated or defined would be `Name` nodes with `ctx = Store` and thus not considered as variables for our task.
+Concretely, in the piece of code below, the variables would be `epsilon` (attribute of the keras backend), `y_true` (as a parameter), `y_pred` (as a parameter), and `kl_div` (when it's created).  However, the later mentions of all 3 (e.g. in `y_true = K.clip(y_true, K.epsilon, 1)` or `return kl_div`) after they are instantiated or defined would be `Name` nodes with `ctx = Store` and thus not considered as variables for our task.
 
 ```python
 def kullback_leibler_divergence(y_true, y_pred):
@@ -30,7 +33,7 @@ Allamanis et al. also embed terminal nodes by averaging a learned embedding for 
 
 ## Results
 
-On a python150k test set, we achieve the following accuracies:
+On a python150k test set, we achieve the following accuracies on a randomly sampled subset of the test dataset (described below):
 
 ```
 Accuracy@1: 34.5671%
@@ -38,24 +41,26 @@ Accuracy@3: 42.4864%
 Accuracy@5: 45.6902%
 ```
 
-These numbers are on a randomly sampled subset of the test dataset (described below), and we 
+This is similar to the original authors' accuracy @1 using only Syntax edges on their C# dataset (34.3%)
 
 ## Steps for Reproduction
 
-1) Download and unzip the python150k dataset from ETH Zurich (into the root of this repository):
+1) Download and unzip the python150k dataset and python150k source files from ETH Zurich (into the root of this repository):
 
 ```
 wget http://files.srl.inf.ethz.ch/data/py150.tar.gz
 tar xvzf py150.tar.gz
-```
-
-2) Download and unzip the python150k source files:
-
-```
 cd py150
 wget http://files.srl.inf.ethz.ch/data/py150_files.tar.gz
 tar xvzf py150_files.tar.gz
 mv py150_files py150_src_files ## Apologies for unnecessarily renaming the folder
+```
+
+2) Create a virtual environment and install dependencies:
+```
+virtualenv .env (make sure it uses Python3.5+)
+.env/bin/activate
+pip install -r Models/requirements.txt
 ```
 
 3) Convert the dataset from the format that the python150k graphs are provided in to the format used by the MSR model.  We use the same input graph format as the one used in the [VarMisuse dataset](https://www.microsoft.com/en-us/download/details.aspx?id=56844) released by MSR (which results in some clunky syntax because we need to store less information than they did).  This will create a folder called `py150_parsed` that contains `eval` and `test` subfolders with 10 JSON-ized and randomly masked snippets for every AST in the original dataset.
@@ -93,7 +98,7 @@ gzip -r py150_parsed/python50k_eval/dev
 python Models/utils/train.py --model graph2seq --hypers-override '{"excluded_cg_edge_types": ["LastLexicalUse", "LastUse", "LastWrite", "GuardedBy", "GuardedByNegation", "FormalArgName", "ComputedFrom", "ReturnsTo"],  "cg_node_type_embedding_size" : 0, "cg_add_subtoken_nodes" : false, "cg_ggnn_residual_connections" : {}}' --run-name py150v2 Models/trained_models py150_tensorized/python100k_train py150_tensorized/dev
 ```
 
-Our model converged after 212 epochs with the default hyperparameter settings.  Note that we exclude all of the Semantic edges from the program graphs and disable node type embeddings with the override parameter `"cg_node_type_embedding_size" : 0`.
+Our model converged after 260 epochs with the default hyperparameter settings.  Note that we exclude all of the Semantic edges from the program graphs and disable node type embeddings with the override parameter `"cg_node_type_embedding_size" : 0`.
 
 7) Test the model!
 
@@ -119,7 +124,7 @@ for file in new_files:
 ## Dataset Preparation
 
 ### Python150k Dataset Format
-The Python150k dataset contains graphs in the following format (see [sample_py150_graph.json]() INSERT LINK)
+The Python150k dataset contains graphs in the following format (see [sample_py150_graph.json](https://github.com/haighal/graph-based-code-modelling/blob/master/sample_py150_graph.json))
 
 - `python100k_train.txt` contains the names of files and their corresponding GitHub repos
 - `python100k_train.json` contains the ASTs of the parsed files.  Each line is a json file, and each graph is a list of (0-indexed) nodes, each represented as an object with several name/value pairs:
@@ -128,45 +133,46 @@ The Python150k dataset contains graphs in the following format (see [sample_py15
     - (Optional) `children`: array of integers denoting indices of children (if any) of the current AST node. Indices are 0-based starting from the first node in the JSON file
 
 ### MSR Dataset Format
-We convert it to the format of the dataset released by MSR [here](https://www.microsoft.com/en-us/download/details.aspx?id=56844).  Each file is a json object that is a list of graphs, and each graph has the following fields (see [sample_msr_graph.json]()):
-- ContextGraph - the main graph object
-    - Edges
-        - Child - a list of [src, dst] node IDs, which correspond to the edges of the original AST
-        - NextToken - a list of [src, dst] node IDs, which correspond to consecutive terminal nodes in the original AST
-    - NodeLabels - a dict from node ID (as a string) to name (either the node type or the name of the variable).  Per Allamanis et al., "We label syntax nodes with the name of the nonterminal from the program's grammar, whereas syntax tokens are labeled with the string that they represent"
-    - NodeTypes - this usually holds the variable type, but we just set it to be an empty dictionary (which is then ignored) because we don't have that information in Python
-- SlotDummyNode - int corresponding to the node ID of the <SLOT> token in the vocabulary
-- SymbolCandidates - list of dicts containing {"IsCorrect": true, "SymbolDummyNode": 1, "SymbolName": "parameter"}
-- filename - code file that the AST came from
-- slotTokenIdx - index of the token in the source file that is described by this problem instance.  We set it to be blank because it's mostly used for debugging and didn't want to go back into the source files to link them.
+We convert it to the format of the dataset released by MSR [here](https://www.microsoft.com/en-us/download/details.aspx?id=56844).  Each file is a json object that is a list of graphs, and each graph has the following fields (see [sample_msr_graph.json](https://github.com/haighal/graph-based-code-modelling/blob/master/sample_msr_graph.json):
+- `ContextGraph` - the main graph object
+    - `Edges`
+        - `Child` - a list of `[src, dst]` node IDs, which correspond to the edges of the original AST
+        - `NextToken` - a list of `[src, dst]` node IDs, which correspond to consecutive terminal nodes in the original AST
+    - `NodeLabels` - a dict from node ID (as a string) to name (either the node type or the name of the variable).  Per Allamanis et al., "We label syntax nodes with the name of the nonterminal from the program's grammar, whereas syntax tokens are labeled with the string that they represent"
+    - `NodeTypes` - this usually holds the variable type, but we just set it to be an empty dictionary (which is then ignored) because we don't have that information in Python
+- `SlotDummyNode` - int corresponding to the node ID of the `<SLOT>` token in the vocabulary
+- `SymbolCandidates` - list of dicts containing `{"IsCorrect": true, "SymbolDummyNode": 1, "SymbolName": "parameter"}` for the correct variable name
+- `filename` - code file that the AST came from
+- `slotTokenIdx` - index of the token in the source file that is described by this problem instance.  We set it to be blank because it's mostly used for debugging and didn't want to go back into the source files to link them.
 
 ### Pipeline Overview
 
-We convert the python150k dataset to the MSR format using `convert_dataset.py`.  The snippets for each graph are done by the function `create_varnaming_samples` if you want to use it on a one-off basis.  At a high level, the code does the following to each AST:
+We convert the python150k dataset to the MSR format using `convert_dataset.py`.  The snippets for each graph are created by the function `create_varnaming_samples` if you want to use it on a one-off basis.  At a high level, the code does the following to each AST:
 - Converts the AST to a Python NetworkX graph (with node attribute information)
 - Generates (up to) 10 non-overlapping snippets from the AST, defined as subgraphs of the AST with between 10 and 64 nodes.  We generate these by DFS from nodes starting at the root and traversing down the tree until we arrive at a subgraph of the right size
 - Chooses a random variable (as defined in the VarNaming section above) to mask and masks it
 - Converts the NetworkX graph for the snippet to ContextGraph
 
-This is the same traversal strategy used in [codegraph-fmt](https://github.com/dtsbourg/codegraph-fmt) and in the preprint paper (the `generate_snippets` function is identical).
+This is the same traversal strategy used in [codegraph-fmt](https://github.com/dtsbourg/codegraph-fmt) and in a preprint paper (the `generate_snippets` function is identical).
 
 ## Modifications to the Original Repo
 
-The base of the model used in *Learning to Represent Code with Graphs* already existed in the [original Graph-Based Code Modelling Repo](https://github.com/microsoft/graph-based-code-modelling) via the Graph2SeqModel (`models/exprsynth/Graph2SeqModel`, found [here]()).  This uses the `ContextGraphModel` introduced in *Learning to Represent Code with Graphs* to encode the graph: it embeds nodes based on their string representation and variable type information using a CharCNN then performs message passing with a Graph Gated Neural Network (GGNN) to generate an output representation for every node.  The sequence decoder then finds the output representation of the the `<SLOT>` token and uses that as the input to a GRU decoder that predicts a target string as a sequence of subtokens (e.g., the name input_stream_buffer is treated as the sequence \[input, stream, buffer\]).  This graph2seq architecture is trained using a maximum likelihood objective.
+The base of the model used in *Learning to Represent Code with Graphs* already existed in the [original Graph-Based Code Modelling Repo](https://github.com/microsoft/graph-based-code-modelling) via the Graph2SeqModel (`models/exprsynth/graph2seqmodel`, found [here](https://github.com/haighal/graph-based-code-modelling/blob/master/models/exprsynth/graph22eqmodel)).  This uses the `ContextGraphModel` introduced in *Learning to Represent Code with Graphs* to encode the graph: it embeds nodes based on their string representation and variable type information using a CharCNN then performs message passing with a Graph Gated Neural Network (GGNN) to generate an output representation for every node.  The sequence decoder then finds the output representation of the the `<SLOT>` token and uses that as the input to a GRU decoder that predicts a target string as a sequence of subtokens (e.g., the name `input_stream_buffer` is treated as the sequence `[input, stream, buffer]`).  This graph2seq architecture is trained using a maximum likelihood objective.
 
 Our modifications were thus primarily to the infrastructure of the codebase to rewire the data pipeline.  We initially started working with a C# dataset released by Allamanis et al., so we modified the pipeline to handle graphs of this strucutre (although it would have been easier to directly convert the Python150k graphs to the original schema). 
 
 #### List of Modifications
-- Our graphs don't have edge values or weights.  Removed the reference to `raw_sample['ContextGraph']['EdgeValues']` in  `"Models/exprsynth/contextgraphmodel.py", line 287, in _load_metadata_from_sample`
+- Our graphs don't have edge values or weights.  We removed the reference to `raw_sample['ContextGraph']['EdgeValues']` in  `"Models/exprsynth/contextgraphmodel.py", line 287, in _load_metadata_from_sample`
 - We're generating a string rather than completing the program graph.  We thus don't have the field `raw_sample['SymbolLabels']` and remove calls to it.  To generate the ground truth sequence, we:
     - Use `dpu_utils.codeutils.split_identifier_into_parts` to split variable names into subtokens in `load_metadata_from_sample` and then use the resulting tokens to update the `decoder_token_counter`
     - We do the same thing in `load_data_from_sample` instead of calling `collect_token_seq` (and just remove `collect_token_seq` and calls to `raw_sample["Productions"]`)
     - These are both implemented in the method `extract_tokens_from_sample` in `Models/exprsynth/utils.py`
 - We change every instance of the string `"<HOLE>"` to `"<SLOT>"`, `"HoleNode"` to `"SlotDummyNode"`, and `"HoleLineSpan"` to `"SlotDummyNode"` (just a product of the different schema)
-- Removed a couple calls to fields that didn't exist in our schema that were unnecessary for the task (e.g. `loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']` and `rite_snippet(sample_idx, build_csharp_check_function(raw_sample, ' '.join(predictions[0][0])))` in `Models/utils/test.py`
-- Removed `is_train` argument on `SeqDecoder.finalise_minibatch()` since it isn't used
-- To ignore Variable Type Information:
-    - Guarded references to the  `TypeLattice` in lines 249 in `Models/exprsynth/model.py` and 344 and 399 in `Models/exprsynth/contextgraphmodel.py` with `if hyperparameters['cg_node_type_embedding_size'] > 0:`
+- Removed a couple calls to fields that didn't exist in our schema that were unnecessary for the task (e.g. `loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']` and `write_snippet(sample_idx, build_csharp_check_function(raw_sample, ' '.join(predictions[0][0])))` in `Models/utils/test.py`
+- Removed `is_train` argument on `SeqDecoder.finalise_minibatch()` since it isn't used and was causing crashes
+- To ignore variable type innformation:
+    - In the `hypers_override` call to the model, we set `'cg_node_type_embedding_size = 0`
+    - We then guarded references to the  `TypeLattice` in lines 249 in `Models/exprsynth/model.py` and 344 and 399 in `Models/exprsynth/contextgraphmodel.py` with `if hyperparameters['cg_node_type_embedding_size'] > 0:`
     
 # (Original README) Generative Code Modeling with Graphs
 
