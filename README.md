@@ -1,6 +1,6 @@
 # Learning to Represent Programs with Graphs: Variable Naming with Graph Neural Networks
 
-This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the Variable Naming task on the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich; this model is used as a baseline in a paper currently under review.  
+This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the Variable Naming task on the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich.  
 
 This repo is a fork of [microsoft/graph-based-code-modelling](https://github.com/microsoft/graph-based-code-modelling), which has the source code for a different paper by the authors.  However, the repo contained all the pieces necessary to reproduce the model (a pipeline to tensorize program graphs, generate node embeddings using a CharCNN, perform message passing with a GGNN (`ContextGraphModel`), and output variable names using a GRU Decoder (`SeqDecoder`).  With the generous assistance of Marc Brockschmidt (@mmjb), we refactored the codebase to perform Variable Naming (instead of code generation) and work on a Python dataset.
 
