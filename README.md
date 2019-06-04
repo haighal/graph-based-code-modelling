@@ -2,12 +2,12 @@
 
 This repo applies the model of Allamanis et al. ([Learning to Represent Programs with Graphs](https://openreview.net/forum?id=BJOFETxR-) from ICLR '18) to the Variable Naming task on the [Python150k Dataset](https://www.sri.inf.ethz.ch/py150) published by ETH Zurich.  
 
-This repo is a fork of [microsoft/graph-based-code-modelling](https://github.com/microsoft/graph-based-code-modelling), which has the source code for a different paper by the authors.  However, the repo contained all the pieces necessary to reproduce the model (a pipeline to tensorize program graphs, generate node embeddings using a CharCNN, perform message passing with a GGNN (`ContextGraphModel`), and output variable names using a GRU Decoder (`SeqDecoder`)).  With the generous assistance of Marc Brockschmidt (@mmjb), we refactored the codebase to perform Variable Naming instead of code generation and run on a Python dataset.
+This repo is a fork of [microsoft/graph-based-code-modelling](https://github.com/microsoft/graph-based-code-modelling), which has the source code for a different paper by the authors.  However, the repo contained all the pieces necessary to reproduce the model: a pipeline to tensorize program graphs, generate node embeddings using a CharCNN, perform message passing with a GGNN (`ContextGraphModel`), and output variable names using a GRU Decoder (`SeqDecoder`).  With the generous assistance of Marc Brockschmidt (@mmjb), we refactored the codebase to perform Variable Naming instead of code generation and run on a Python dataset.
 
 ## Model
 
 ### Program Graphs
-Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some semantic edges could be derived, we decided to **use Syntax edges only** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).  Because we don't 
+Because Python is dynamically rather than statically typed and interpreted rather than compiled, we are unable to create many of the semantic edges used in program graphs.  While some semantic edges could be derived, we decided to **use Syntax edges only** (`Child` edges from the raw AST and and `NextToken` edges connecting consecutive terminal AST nodes).
 
 ### VarNaming Task
 We formulate the VarNaming task slightly differently than Allamanis et al.  In particular, in "Learning to Represent Programs with Graphs," the authors create their input graph by masking *all* instances of a specific variable name in the AST using a special `<SLOT>` token.  The model then the variable name based on the combined context (and average the output representation of each `<SLOT>`).  This program graph is richer than what we use:
