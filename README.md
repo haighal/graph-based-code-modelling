@@ -171,7 +171,7 @@ Our modifications were thus primarily to the infrastructure of the codebase to r
 - Removed a couple calls to fields that didn't exist in our schema that were unnecessary for the task (e.g. `loaded_train_sample['Provenance'] = raw_sample['Filename'] + "::" + raw_sample['HoleLineSpan']` and `write_snippet(sample_idx, build_csharp_check_function(raw_sample, ' '.join(predictions[0][0])))` in `Models/utils/test.py`
 - Removed `is_train` argument on `SeqDecoder.finalise_minibatch()` since it isn't used and was causing crashes
 - To ignore variable type innformation:
-    - In the `hypers_override` call to the model, we set `'cg_node_type_embedding_size = 0`
+    - In the `hypers_override` argument of the calls to tensorize/train/test, we set `'cg_node_type_embedding_size = 0`
     - We then guarded references to the  `TypeLattice` in lines 249 in `Models/exprsynth/model.py` and 344 and 399 in `Models/exprsynth/contextgraphmodel.py` with `if hyperparameters['cg_node_type_embedding_size'] > 0:`
     
 # (Original README) Generative Code Modeling with Graphs
