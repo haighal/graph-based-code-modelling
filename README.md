@@ -60,8 +60,8 @@ mv py150_files py150_src_files ## Apologies for unnecessarily renaming the folde
 
 2) Create a virtual environment and install dependencies:
 ```
-virtualenv .env (make sure it uses Python3.5+)
-.env/bin/activate
+virtualenv .env #(make sure it uses Python3.5+)
+source .env/bin/activate
 pip install -r Models/requirements.txt
 ```
 
